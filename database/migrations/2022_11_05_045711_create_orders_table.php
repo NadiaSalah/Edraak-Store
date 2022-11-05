@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('total_quantity');
             $table->decimal('final_price',8,2);
             $table->string('status')->default('processing'); // processing, shipped, delivered, complete, canceled
-            $table->int('payment')->default(0); // 0 :cash , 1: online
+            $table->integer('payment')->default(0); // 0 :cash , 1: online
         });
     }
 

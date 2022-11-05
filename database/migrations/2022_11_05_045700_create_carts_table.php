@@ -24,9 +24,9 @@ return new class extends Migration
                 ->constrained('product_sizes')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->decimal('price',8.2);
+            $table->decimal('price',8,2);
             $table->integer('quantity');
-            $table->decimal('total_price',8.2);
+            $table->decimal('total_price',8,2);
         });
     }
 
