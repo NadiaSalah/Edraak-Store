@@ -21,7 +21,7 @@ return new class extends Migration
                   ->cascadeOnDelete()
                   ->cascadeOnUpdate();
             $table->foreignId('size_id')
-                  ->nullable()
+                  ->nullable() // null for products have not size
                   ->constrained('sizes');
             $table->softDeletes();
         });

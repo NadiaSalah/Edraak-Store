@@ -38,8 +38,8 @@ In this section, a list of all the requirements/features of the project are pres
 Put an X between the brackets for each feature that has been developed and tested by you.
 
 ### Admin:
-- [ ] An Admin account should be created by the developer.
-- [ ] The admin should be able to log into the website.
+- [x] An Admin account should be created by the developer.
+- [x] The admin should be able to log into the website.
 - [ ] The logged-in admin should be able to create, list, update, and delete different product categories and subcategories.
 - [ ] The logged-in admin should be able to create, list, update, and delete different products.
 - [ ] The logged-in admin should be able to add and remove products from subcategories.
