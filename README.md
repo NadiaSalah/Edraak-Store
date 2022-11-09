@@ -66,7 +66,7 @@ Put an X between the brackets for each feature that has been developed and teste
 
 ## Database Schema
 
-![schema](https://github.com/NadiaSalah/Edraak-Store/blob/main/project_design/db_schema/edraake_store.jpg)
+![schema](https://github.com/NadiaSalah/Edraak-Store/blob/master/project_design/db_schema/edraake_store.jpg)
 ## Demo 
 
 [https://youtu.be/xxxxxxxx-go](https://youtu.be/xxxxxxxx-go) 
