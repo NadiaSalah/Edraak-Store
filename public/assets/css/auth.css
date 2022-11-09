@@ -1,0 +1,46 @@
+body {
+  background-color: #c1e0ff;
+  background-image: linear-gradient(135deg, #011153, #E14C2B);
+
+}
+
+.auth {
+  margin: 25vh auto;
+  width: 80%;
+}
+
+@media (max-width: 992px) {
+  .auth {
+    margin: 15vh auto;
+    width: 90%;
+    flex-direction: column;
+  }
+}
+
+.auth_img {
+  min-width: 45%;
+  background: url(/assets/images/front/auth.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 992px) {
+  .auth_img {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+
+
+.logo {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+@media (max-width: 576px) {
+  .input-group > .form-control{
+    min-width: 100% !important;
+  }
+}

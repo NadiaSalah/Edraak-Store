@@ -1,71 +1,28 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <!-- Name -->
-            <div>
-                <x-input-label for="first_name" :value="__('First Name')" />
-
-                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus />
-
-                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
-            </div>
-            <div>
-                <x-input-label for="last_name" :value="__('Last Name')" />
-
-                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus />
-
-                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-primary-button class="ml-4">
-                    {{ __('Register') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+@extends('layouts.auth')
+@section('page')
+    <h4 class="text-primary  fw-semibold my-3">Registration</h4>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="input-group">
+            <span class="input-group-text">First and last name</span>
+            <input type="text" aria-label="First name" class="form-control" name="first_name" value="{{old('first_name')}}" placeholder="First Name" required autofocus >
+            <input type="text" aria-label="Last name" class="form-control" name="last_name" value="{{old('last_name')}}" placeholder="Last Name" required autofocus>
+        </div>
+        <div class="input-group my-3">
+            <input type="email" class="form-control" placeholder="Email address" aria-label="Email address"
+                aria-describedby="basic-addon2" name="email" value="{{old('email')}}" required>
+            <span class="input-group-text" id="basic-addon2">@example.com</span>
+        </div>
+        <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password"
+            required autocomplete="new-password">
+        </div>
+        <div class="col-auto mt-3">
+            <label for="inputPassword2" class="visually-hidden">Confirm Password</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password" name="password_confirmation" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 px-3">Register</button>
+        <a  href="{{ route('login') }}" class="btn btn-success mt-3 px-4">Login ></a>
+    </form>
+@endsection
