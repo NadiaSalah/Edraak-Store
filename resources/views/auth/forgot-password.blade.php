@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('page') 
-<div class="alert alert-info mt-3 mb-4" role="alert">
+<div class="alert alert-info fw-lighter mt-3 mb-4" role="alert">
     Forgot your password? No problem. Just let us know your email address and we will email you a password
     reset link that will allow you to choose a new one.
 </div>

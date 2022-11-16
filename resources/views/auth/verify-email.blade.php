@@ -7,7 +7,7 @@
 
 
     @if (session('status') == 'verification-link-sent')
-        <div class="alert alert-success mt-3 mb-4" role="alert">
+        <div class="alert alert-success fw-lighter mt-3 mb-4" role="alert">
             A new verification link has been sent to the email address you provided during registration.
         </div>
     @endif

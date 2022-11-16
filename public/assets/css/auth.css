@@ -9,6 +9,7 @@ body {
   width: 80%;
 }
 
+
 @media (max-width: 992px) {
   .auth {
     margin: 15vh auto;
