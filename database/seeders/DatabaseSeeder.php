@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\MainCategory;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +25,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            UserSeeder::class //add admin in database automatically 
+            UserSeeder::class, //add admin in database automatically 
+            MainCategorySeeder::class, //add main categories in database automatically 
+            SubCategorySeeder::class, //add sub categories in database automatically 
+            MainSubCategorySeeder::class, //add main_sub categories in database automatically 
         ]);
     }
 }

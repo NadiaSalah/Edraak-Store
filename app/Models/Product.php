@@ -28,8 +28,8 @@ class Product extends Model
         return $this->belongsTo(MainSubCategory::class);
     }
 
-    public function productSizes(){
-        return $this->hasMany(ProductSize::class);
+    public function sizes(){
+        return $this->belongsToMany(Size::class,'product_size_items');
     }
 
     public function productAlerts(){

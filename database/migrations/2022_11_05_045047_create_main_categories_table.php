@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('main_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('image')->nullable(); // default null
+            $table->string('image')->default('https://fakeimg.pl/300/'); // default fake img
             $table->timestamps();
             $table->softDeletes();
            

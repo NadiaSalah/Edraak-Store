@@ -17,7 +17,7 @@ class MainCategory extends Model
         
     ];
 
-    public function mainSubCategories(){
-        return $this->hasMany(MainSubCategory::class);
+    public function subCategories(){
+        return $this->belongsToMany(SubCategory::class,'main_sub_categories');
     }
 }

@@ -26,7 +26,7 @@ Route::get('/', [RedirectController::class,'redirect'])->name('home');
 
 Route::middleware(['auth','Verified'])->group(function(){
   Route::controller(AdminController::class)->group(function(){
-    
+    Route::get('categories/index','categories_index')->name('categories_index');
   
   });
 

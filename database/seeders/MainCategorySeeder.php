@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class MainCategorySeeder extends Seeder
 {
@@ -14,6 +16,14 @@ class MainCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('main_categories')->insert([
+            'name'=>'Women'  
+        ]);
+        DB::table('main_categories')->insert([
+            'name'=>'Men'  
+        ]);
+        DB::table('main_categories')->insert([
+            'name'=>'Kids'  
+        ]);
     }
 }
