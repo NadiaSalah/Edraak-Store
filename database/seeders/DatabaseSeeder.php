@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             MainCategorySeeder::class, //add main categories in database automatically 
             SubCategorySeeder::class, //add sub categories in database automatically 
             MainSubCategorySeeder::class, //add main_sub categories in database automatically 
+            SizeSeeder::class, //add sizes categories in database automatically 
+
         ]);
     }
 }

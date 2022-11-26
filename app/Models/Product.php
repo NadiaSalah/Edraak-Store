@@ -20,7 +20,7 @@ class Product extends Model
         'discount',
         'view',
         'return',
-        'min_sub_category_id',
+        'main_sub_category_id',
        
     ];
 

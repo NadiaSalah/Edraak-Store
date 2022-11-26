@@ -1,8 +1,7 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.front')
+@section('page')
     <div class="container">
-        <h1> welcome Home</h1>
-        
+        <h1 class="mt-4"> welcome Home</h1>
             @auth
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

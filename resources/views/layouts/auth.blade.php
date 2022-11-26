@@ -4,6 +4,7 @@
 <link href="{{ asset('assets/css/auth.css') }}" rel="stylesheet">  
 @endsection
 @section('content')
+
 <div class="container">
   <div class=" d-flex  shadow rounded  bg-white  auth">
     <div class=" auth_img ">
@@ -13,7 +14,7 @@
         <a href="/" class="logo"> 
           <img src="{{ asset('assets/images/front/logo.jpg')}}" class="img-fluid " alt="logo">
         </a>
-        @include('includes.error')
+        @include('includes.message')
         <div class="auth_form">
           @yield('page')
         </div>

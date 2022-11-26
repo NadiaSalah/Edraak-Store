@@ -10,14 +10,20 @@ class MainCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'main_categories';
 
     protected $fillable = [
         'name',
         'image'
-        
+
     ];
 
-    public function subCategories(){
-        return $this->belongsToMany(SubCategory::class,'main_sub_categories');
+    public function subCategories()
+    {
+        return $this->belongsToMany(SubCategory::class, 'main_sub_categories');
+    }
+    public function mainSubCategories()
+    {
+        return $this->hasMany(MainSubCategory::class);
     }
 }

@@ -1,6 +1,18 @@
  @extends('layouts.admin')
  <!--title-->
- @section('page_title', 'Categories')
+ @section('page_title')
+     <nav>
+         <ol class="breadcrumb">
+             <li class="breadcrumb-item">Categories</li>
+             <li class="breadcrumb-item">Main</li>
+             <li class="breadcrumb-item ">
+                 <a class=" link-primary" href="{{ route('subCategories.index') }}">
+                     Sub >>
+                 </a>
+             </li>
+         </ol>
+     </nav>
+ @endsection
  <!--End title-->
  @section('page')
      <!--nave-->
@@ -10,212 +22,290 @@
      <div class="items mt-5">
          <div class="accordion" id="accordionExample">
              <!-- mainCategories-->
-             <div class="accordion-item">
-                 <div class="accordion-header accordion-button " id="headingX">
-                     <div class="row w-100">
-                         <h4 class='col-12 col-sm  align-self-start'>Accordion Item #1
-                             <!-- Button trigger category image modal -->
-                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                 data-bs-target="#img_mainCategory">
-                                 <i class="fa-regular fa-image"></i>
-                             </button>
-                             <!--END Button-->
-                         </h4>
-                         <div class="btn-group col-auto align-self-end" role="group"
-                             aria-label="Basic mixed styles example">
-                             <!-- Button remove mainCategory -->
-                             <a href="#" class="btn btn-danger">
-                                 <i class="fa-solid fa-trash"></i></a>
-                             <!--END Button-->
-                             <!-- Button trigger Edit mainCategory modal -->
-                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                 data-bs-target="#edit_mainCategory">
-                                 <i class="fa-solid fa-pen-to-square"></i></button>
-                             <!--END Button-->
-                             <!-- Button trigger create subCategory modal -->
-                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                 data-bs-target="#create_subCategory">
-                                 <i class="fa-solid fa-plus"></i></button>
-                             <!--END Button-->
-                             <button type="button" class=" btn btn-primary " data-bs-toggle="collapse"
-                                 data-bs-target="#collapseX" aria-expanded="false" aria-controls="collapseX">
-                                 <i class="fa-solid fa-angle-down"></i>
-                             </button>
-                         </div>
-                     </div>
-                 </div>
-                 <!-- mainCategory image Modal -->
-                 <div class="modal fade" id="img_mainCategory" tabindex="-1" aria-labelledby="img_mainCategoryLabel"
-                     aria-hidden="true">
-                     <div class="modal-dialog">
-                         <div class="modal-content">
-                             <div class="modal-header">
-                                 <h1 class="modal-title fs-5" id="staticBackdropLabel"> MainCategory title</h1>
-                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                     aria-label="Close"></button>
-                             </div>
-                             <div class="modal-body">
-                                 <img src="{{ asset('assets/images/front/logo-c.png') }}" class="img-fluid"
-                                     alt="category image">
-                             </div>
-                             <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             @forelse ($main_categories as $main_item)
+                 <div class="accordion-item">
+                     <div class="accordion-header accordion-button " id="headingX{{ $main_item->id }}">
+                         <div class="row w-100">
+                             <h4 class='col-12 col-sm  align-self-start'>{{ $main_item->name }}
+                                 <!-- Button trigger category image modal -->
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                     data-bs-target="#img_mainCategoryX{{ $main_item->id }}">
+                                     <i class="fa-regular fa-image"></i>
+                                 </button>
+                                 <!--END Button-->
+                             </h4>
+                             <div class="btn-group col-auto align-self-end" role="group">
+                                 <!-- Button trigger delet mainCategory modal -->
+                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                     data-bs-target="#delete_mainCategoryX{{ $main_item->id }}">
+                                     <i class="fa-solid fa-trash"></i></button>
+                                 <!--END Button-->
+                                 <!-- Button trigger Edit mainCategory modal -->
+                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                     data-bs-target="#edit_mainCategoryX{{ $main_item->id }}">
+                                     <i class="fa-solid fa-pen-to-square"></i></button>
+                                 <!--END Button-->
+                                 <!-- Button trigger create subCategory modal -->
+                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                     data-bs-target="#create_subCategoryX{{ $main_item->id }}">
+                                     <i class="fa-solid fa-plus"></i></button>
+                                 <!--END Button-->
+                                 <!-- Button collapse-->
+                                 <button type="button" class=" btn btn-primary " data-bs-toggle="collapse"
+                                     data-bs-target="#collapseX{{ $main_item->id }}" aria-expanded="false">
+                                     <i class="fa-solid fa-angle-down"></i>
+                                 </button>
+                                 <!--END Button-->
                              </div>
                          </div>
                      </div>
-                 </div>
-                 <!-- END Modal-->
-                 <!-- create subCategory Modal-->
-                 <div class="modal fade" id="create_subCategory" data-bs-backdrop="static" data-bs-keyboard="false"
-                     tabindex="-1" aria-labelledby="create_subCategoryLabel" aria-hidden="true">
-                     <div class="modal-dialog">
-                         <form>
+                     <!-- mainCategory image Modal -->
+                     <div class="modal fade" id="img_mainCategoryX{{ $main_item->id }}" tabindex="-1" aria-hidden="true">
+                         <div class="modal-dialog">
                              <div class="modal-content">
-                                 <div class="modal-header">
-                                     <h1 class="modal-title fs-5" id="create_subCategoryLabel">Create Sub Category</h1>
+                                 <div class="modal-header bg-primary text-white">
+                                     <h1 class="modal-title fs-5">
+                                         image of {{ $main_item->name }}</h1>
                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
                                          aria-label="Close"></button>
                                  </div>
-                                 <div class="modal-body">
-                                     <div class="mt-3">
-                                         <fieldset disabled>
+                                 <div class="modal-body text-center">
+                                     <img src="{{ asset($main_item->image) }}" class="img-fluid"
+                                         alt="{{ $main_item->name }}">
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- END Modal-->
+                     <!-- create subCategory for mainCategory Modal-->
+                     <div class="modal fade" id="create_subCategoryX{{ $main_item->id }}" data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header bg-success text-white">
+                                     <h1 class="modal-title fs-5">
+                                         Create Sub Category For {{ $main_item->name }}</h1>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                         aria-label="Close"></button>
+                                 </div>
+                                 <form action="{{ route('subCategories.store') }}" method="POST">
+                                     @csrf
+                                     <div class="modal-body">
+                                         <div class="mt-3">
                                              <label class="form-label">Select Main Category</label>
-                                             <select class="form-select">
-                                                 <option value="1">One</option>
+                                             <select class="form-select" name="main" required>
+                                                 <option value="{{ $main_item->id }}">{{ $main_item->name }}</option>
                                              </select>
-                                         </fieldset>
+                                         </div>
+                                         <div class="my-3">
+                                             <label class="form-label">Sub Category Name</label>
+                                             <input name="name" type="text" class="form-control" required
+                                                 value="{{ old('name') }}">
+                                         </div>
                                      </div>
-                                     <div class="my-3">
-                                         <label class="form-label">Sub Category Name</label>
-                                         <input type="text" class="form-control" aria-describedby="emailHelp">
+                                     <div class="modal-footer">
+                                         <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                         <button type="submit" class="btn btn-primary">Store</button>
+                                     </div>
+                                 </form>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- END Model -->
+                     <!-- Delete mainCategory Modal -->
+                     <div class="modal fade" id="delete_mainCategoryX{{ $main_item->id }}" data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-body">
+                                     <div class="alert alert-danger" role="alert">
+                                         Danger! Are you sure to deleteing the main category "{{ $main_item->name }}"
                                      </div>
                                  </div>
                                  <div class="modal-footer">
-                                     <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
-                                     <button type="button" class="btn btn-primary">Create</button>
+                                     <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                     <form class="btn" action="{{ route('mainCategories.destroy', $main_item->id) }}"
+                                         method="POST">
+                                         @csrf
+                                         @method('DELETE')
+                                         <button type="submit" class="btn btn-primary">Delete</button>
+                                     </form>
                                  </div>
                              </div>
-                         </form>
+                         </div>
                      </div>
-                 </div>
-                 <!-- END Model -->
-                 <!-- Edit mainCategory Modal -->
-                 <div class="modal fade" id="edit_mainCategory" data-bs-backdrop="static" data-bs-keyboard="false"
-                     tabindex="-1" aria-labelledby="edit_mainCategoryLabel" aria-hidden="true">
-                     <div class="modal-dialog">
-                         <form>
+                     <!-- END Model -->
+                     <!-- Edit mainCategory Modal -->
+                     <div class="modal fade" id="edit_mainCategoryX{{ $main_item->id }}" data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                         <div class="modal-dialog">
                              <div class="modal-content">
-                                 <div class="modal-header">
-                                     <h1 class="modal-title fs-5" id="edit_mainCategoryLabel">Edit Main Category</h1>
+                                 <div class="modal-header bg-warning text-dark">
+                                     <h1 class="modal-title fs-5">
+                                         Edit Main Category:{{ $main_item->name }}</h1>
                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
                                          aria-label="Close"></button>
                                  </div>
-                                 <div class="modal-body">
-                                     <div class="my-3">
-                                         <label for="exampleInputEmail1" class="form-label">Main Category Name</label>
-                                         <input type="email" class="form-control" id="exampleInputEmail1"
-                                             aria-describedby="emailHelp">
+                                 <form action="{{ route('mainCategories.update', $main_item->id) }}" method="POST" enctype="multipart/form-data">
+                                     @csrf
+                                     @method('PUT')
+                                     <div class="modal-body">
                                          <div class="my-3">
-                                             <label for="formFile" class="form-label">Main Category image</label>
-                                             <input class="form-control" type="file" id="formFile">
+                                             <label class="form-label">Main
+                                                 Category Name</label>
+                                             <input name="name" type="text" class="form-control" required
+                                                 value="{{ $main_item->name }}">
+                                             <div class="my-3">
+                                                 <label class="form-label">Main
+                                                     Category image</label>
+                                                 <input name="image" class="form-control" type="file"
+                                                     value="{{ $main_item->image }}">
+                                                 <div class="form-text">not required.
+                                                 </div>
+                                             </div>
                                          </div>
                                      </div>
-                                 </div>
-                                 <div class="modal-footer">
-                                     <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
-                                     <button type="button" class="btn btn-primary">Edit</button>
-                                 </div>
+                                     <div class="modal-footer">
+                                         <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                         <button type="submit" class="btn btn-primary">Update</button>
+                                     </div>
+                                 </form>
                              </div>
-                         </form>
+                         </div>
                      </div>
-                 </div>
-                 <!-- END Model -->
-                 <!--subCategories-->
-                 <div id="collapseX" class="accordion-collapse collapse show" aria-labelledby="headingX"
-                     data-bs-parent="#accordionExample">
-                     <div class="accordion-body">
-                         <div class="container">
-                             <div class="row ">
-                                 <div class="col-auto m-2">
-                                     <div class="  text-center py-2 px-3 border rounded-pill bg-light">
-                                         <a href="#">Row column</a>
-                                         <div class="btn-group btn-group-sm ms-2" role="group"
-                                             aria-label="Small button group">
-                                             <!-- Button remove subCategory -->
-                                             <a href="#" class="btn btn-outline-dark">
-                                                 <i class="fa-solid fa-trash"></i></a>
-                                             <!--END Button-->
-                                             <!-- Button trigger  Edit subCategory modal -->
-                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                                 data-bs-target="#edit_subCategory">
-                                                 <i class="fa-solid fa-pen-to-square"></i></button>
-                                             <!--END Button-->
-                                             <!-- Button create product -->
-                                             <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                                 data-bs-target="#add_product">
-                                                 <i class="fa-solid fa-plus"></i></a>
-                                             <!--END Button-->
+                     <!-- END Model -->
+                     <!--subCategories-->
+                     <div id="collapseX{{ $main_item->id }}" class="accordion-collapse collapse"
+                         data-bs-parent="#accordionExampleX{{ $main_item->id }}">
+                         <div class="accordion-body">
+                             <div class="container">
+                                 <h5><span class="badge bg-info text-dark"> Sub Categories:</span> </h5>
+                                 <div class="row ">
+                                     @forelse ($main_item->subCategories as $sub_item)
+
+                                         <div class="col-auto m-2">
+                                             <div class="  text-center py-2 px-3 border rounded-pill bg-light">
+                                                 <a href="{{ route('subCategories.show', $sub_item->id) }}">
+                                                     {{ $sub_item->name }}</a>
+                                                 <div class="btn-group btn-group-sm ms-2" role="group">
+                                                     <!-- Button trigger  delete subCategory modal -->
+                                                     <button type="button" class="btn btn-outline-dark"
+                                                         data-bs-toggle="modal"
+                                                         data-bs-target="#delete_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}">
+                                                         <i class="fa-solid fa-trash"></i></button>
+                                                     <!--END Button-->
+                                                     <!-- Button trigger  Edit subCategory modal -->
+                                                     <button type="button" class="btn btn-outline-dark"
+                                                         data-bs-toggle="modal"
+                                                         data-bs-target="#edit_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}">
+                                                         <i class="fa-solid fa-pen-to-square"></i></button>
+                                                     <!--END Button-->
+                                                     <!-- Button create product -->
+                                                     <a href="{{ route('products.create', $sub_item->id) }}"
+                                                         class="btn btn-outline-dark" data-bs-toggle="modal"
+                                                         data-bs-target="#add_productX{{ $main_item->id }}{{ $sub_item->id }}">
+                                                         <i class="fa-solid fa-plus"></i></a>
+                                                     <!--END Button-->
+                                                 </div>
+                                             </div>
                                          </div>
-                                     </div>
-                                     <!-- Edit subCategory Modal -->
-                                     <div class="modal fade" id="edit_subCategory" data-bs-backdrop="static"
-                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="edit_subCategoryLabel"
-                                         aria-hidden="true">
-                                         <div class="modal-dialog">
-                                             <form>
+                                         <!-- Delete subCategory Modal -->
+                                         <div class="modal fade"
+                                             id="delete_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}"
+                                             data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                             aria-hidden="true">
+                                             <div class="modal-dialog">
                                                  <div class="modal-content">
-                                                     <div class="modal-header">
-                                                         <h1 class="modal-title fs-5" id="edit_subCategoryLabel">Edit
-                                                             Sub Category</h1>
-                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                             aria-label="Close"></button>
-                                                     </div>
                                                      <div class="modal-body">
-                                                         <div class="mt-3">
-                                                             <fieldset disabled>
-                                                                 <label class="form-label">Select Main Category</label>
-                                                                 <select class="form-select">
-                                                                     <option value="1">One</option>
-                                                                 </select>
-                                                             </fieldset>
-                                                         </div>
-                                                         <div class="my-3">
-                                                             <label class="form-label">Sub Category Name</label>
-                                                             <input type="text" class="form-control"
-                                                                 aria-describedby="emailHelp">
+                                                         <div class="alert alert-danger" role="alert">
+                                                             Danger! Are you sure to deleteing the sub category
+                                                             "{{ $sub_item->name }}" from main category
+                                                             "{{ $main_item->name }}"
                                                          </div>
                                                      </div>
                                                      <div class="modal-footer">
-                                                         <span type="button" class="btn btn-secondary"
+                                                         <span class="btn btn-secondary"
                                                              data-bs-dismiss="modal">Close</span>
-                                                         <button type="button" class="btn btn-primary">Edit</button>
+                                                         <form class="btn"
+                                                             action="{{ route('mainSubCategories.destroy', ['s_id' => $sub_item->id, 'm_id' => $main_item->id]) }}"
+                                                             method="GET">
+                                                             @csrf
+                                                             <button type="submit"
+                                                                 class="btn btn-primary">Delete</button>
+                                                         </form>
                                                      </div>
                                                  </div>
-                                             </form>
+                                             </div>
                                          </div>
-                                     </div>
-                                     <!-- END Model -->
+                                         <!-- END Model -->
+                                         <!-- Edit subCategory Modal -->
+                                         <div class="modal fade"
+                                             id="edit_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}"
+                                             data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                             aria-hidden="true">
+                                             <div class="modal-dialog">
+                                                 <div class="modal-content">
+                                                     <div class="modal-header bg-warning text-dark">
+                                                         <h1 class="modal-title fs-5 ">
+                                                             Update Sub Category : {{ $sub_item->name }} for <br />
+                                                             Main Category : {{ $main_item->name }}
+                                                         </h1>
+                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                             aria-label="Close"></button>
+                                                     </div>
+                                                     <form action="{{ route('subCategories.update',$sub_item->id) }}"
+                                                         method="POST">
+                                                         @csrf
+                                                         @method('PUT')
+                                                         <div class="modal-body">
+                                                             <div class="mt-3">
+                                                                 <label class="form-label">Select Main
+                                                                     Category</label>
+                                                                 <select class="form-select" name="main" required>
+                                                                     <option value="{{ $main_item->id }}" selected>
+                                                                         {{ $main_item->name }}</option>
+                                                                 </select>
+                                                             </div>
+                                                             <div class="my-3">
+                                                                 <label class="form-label">Sub Category
+                                                                     Name</label>
+                                                                 <input name="name" type="text"
+                                                                     class="form-control" required
+                                                                     value="{{ $sub_item->name }}">
+                                                             </div>
+                                                         </div>
+                                                         <div class="modal-footer">
+                                                             <span class="btn btn-secondary"
+                                                                 data-bs-dismiss="modal">Close</span>
+                                                             <button type="submit"
+                                                                 class="btn btn-primary">Update</button>
+                                                         </div>
+                                                     </form>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <!-- END Model -->
+                                     @empty
+                                         <p>sorry, there are not Sub Categories</p>
+                                     @endforelse
                                  </div>
                              </div>
                          </div>
                      </div>
+                     <!--END subCategories-->
                  </div>
-                 <!--END subCategories-->
-             </div>
-             <!-- END mainCategories-->
+                 <!-- END mainCategories-->
+             @empty
+                 <p>sorry, there are not main categories</p>
+             @endforelse
          </div>
      </div>
-
-
-
-
-
-
-
-
+     <div class="my-5"> {{ $main_categories->links() }}</div>
      <!--page-->
  @endsection
-
  @section('script')
      @parent
      <script>
@@ -224,5 +314,4 @@
              $('#categories_link').addClass('active');
          });
      </script>
-
  @endsection

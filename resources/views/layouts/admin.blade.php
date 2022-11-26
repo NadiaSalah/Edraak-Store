@@ -17,6 +17,7 @@ admin
         <div class="admin_content mb-5">
             <div class="container pt-2">
                 <h3 class="my-3">@yield('page_title')</h3>
+                @include('includes.message')
                 @yield('page')
             </div>
         </div>

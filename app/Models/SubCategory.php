@@ -11,11 +11,18 @@ class SubCategory extends Model
     use HasFactory;
     use SoftDeletes;
     
+
+
     protected $fillable = [
         'name'        
     ];
 
     public function mainCategories(){
         return $this->belongsToMany(MainCategory::class,'main_sub_categories');
+    }
+
+    public function mainSubCategories()
+    {
+        return $this->hasMany(MainSubCategory::class);
     }
 }

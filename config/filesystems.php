@@ -44,6 +44,38 @@ return [
             'throw' => false,
         ],
 
+        'main-categories' => [
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/images/main-categories',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'products' => [
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/images/products',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'users' => [
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/images/users',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'front' => [
+            'driver' => 'local',
+            'root' => base_path().'/public/assets/images/front',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

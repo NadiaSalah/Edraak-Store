@@ -23,6 +23,9 @@ return new class extends Migration
                   ->constrained('sub_categories')
                    ->cascadeOnDelete()
                    ->cascadeOnUpdate(); 
+
+            // $table->integer('main_category_id');
+            // $table->integer('sub_category_id');
             $table->timestamps();
             $table->softDeletes();
         });

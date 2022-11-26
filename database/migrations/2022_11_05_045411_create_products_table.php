@@ -21,10 +21,10 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('price',8,2);
             $table->integer('discount'); // 0:100 %
-            $table->string('view')->default('normal'); // normal , recommended , sale
+            $table->string('view')->default('normal'); // normal ,hot
             $table->boolean('return')->default(false); // return policy
             $table->timestamps();
-            $table->foreignId('min_sub_category_id')
+            $table->foreignId('main_sub_category_id')
                   ->constrained('main_sub_categories')
                   ->cascadeOnDelete()
                   ->cascadeOnUpdate();

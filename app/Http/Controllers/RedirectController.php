@@ -11,7 +11,7 @@ class RedirectController extends Controller
     {
         if (Auth::User() !== null) {
             if (Auth::User()->role == 0) {
-                return view('admin.categories.index');
+                return redirect()->route('admin.welcome');
             } else {
                 return view('front.home');
             }
