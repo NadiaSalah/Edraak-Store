@@ -63,7 +63,7 @@ class ProductController extends Controller
         $main_sub = SubCategory::findOrFail($sub_category)->mainSubcategories;
         foreach ($main_sub as $item) {
             if (Product::where('name', $name)
-                ->where('main_sub_category_id', $item)
+                ->where('main_sub_category_id', $item->id)
                 ->first()
             ) {
                 Session::flash('error', 'Sorry, It is forbidden to repeat a product name in the same subcategory');
@@ -159,11 +159,15 @@ class ProductController extends Controller
         $main_sub = SubCategory::findOrFail($sub_category)->mainSubcategories;
         foreach ($main_sub as $item) {
             if (Product::where('name', $name)
-                ->where('main_sub_category_id', $item)
-                ->first()
+                ->where('main_sub_category_id', $item->id)
+                ->first() 
             ) {
-                Session::flash('error', 'Sorry, It is forbidden to repeat a product name in the same subcategory');
-                return redirect()->back();
+                if(Product::where('name', $name)
+                ->where('main_sub_category_id', $item->id)
+                ->first()->id != $products->id){
+                    Session::flash('error', 'Sorry, It is forbidden to repeat a product name in the same subcategory');
+                    return redirect()->back();
+                } 
             }
         }
 
