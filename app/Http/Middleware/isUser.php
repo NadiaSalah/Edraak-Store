@@ -22,7 +22,7 @@ class isUser
             return $next($request);
         } else {
             Session::flash('error', 'You are not User!');
-            return redirect()->back();
+            return redirect()->route('home');
         }
     }
 }

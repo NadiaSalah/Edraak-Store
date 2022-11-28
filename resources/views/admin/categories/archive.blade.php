@@ -3,12 +3,12 @@
  @section('page_title')
      <nav>
          <ol class="breadcrumb">
-            <li class="breadcrumb-item ">
-                Archive Categories
-            </li>
-                <li class="breadcrumb-item ">  
-                   
-                 <span class="badge text-bg-warning position-relative">Main 
+             <li class="breadcrumb-item ">
+                 Archive Categories
+             </li>
+             <li class="breadcrumb-item ">
+
+                 <span class="badge text-bg-warning position-relative">Main
                      @if ($main_categories != null)
                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                              {{ $main_categories->count() }}
@@ -19,7 +19,7 @@
              </li>
              <li class="breadcrumb-item  mt-2 mt-sm-0">
                  <a class=" link-primary" href="{{ route('subCategories.archive') }}">
-                     Sub >> 
+                     Sub >>
                  </a>
              </li>
          </ol>
@@ -113,7 +113,7 @@
                                      </div>
                                  </div>
                                  <div class="modal-footer">
-                                     <span  class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                     <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
                                      <a href="{{ route('mainCategories.restoreAll') }}" class="btn btn-primary">Restore All
                                      </a>
                                  </div>
@@ -132,7 +132,7 @@
                                      </div>
                                  </div>
                                  <div class="modal-footer">
-                                     <span  class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                     <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
                                      <a href="{{ route('mainCategories.forceDeleteAll') }}" class="btn btn-primary">Force
                                          Delete All</a>
                                  </div>
@@ -152,7 +152,7 @@
                                      </div>
                                  </div>
                                  <div class="modal-footer">
-                                     <span  class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                     <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
                                      <a href="{{ route('mainCategories.restore', $main_item->id) }}"
                                          class="btn btn-primary">Restore</a>
                                  </div>
@@ -171,7 +171,7 @@
                                      </div>
                                  </div>
                                  <div class="modal-footer">
-                                     <span  class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                     <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
                                      <a href="{{ route('mainCategories.forceDelete', $main_item->id) }}"
                                          class="btn btn-primary">Force Delete</a>
                                  </div>
@@ -205,8 +205,12 @@
              @endforelse
          </div>
      </div>
+     <!--Pagination-->
+     <div class="mt-5 d-flex justify-content-center">
+         {!! $main_categories->links() !!}
+     </div>
+     <!--End Pagination-->
      <!--page-->
-     <div class="my-5"> {{ $main_categories->links() }}</div>
  @endsection
  @section('script')
      @parent

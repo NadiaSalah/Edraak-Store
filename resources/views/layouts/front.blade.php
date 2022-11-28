@@ -9,12 +9,11 @@
     <!-- End aside -->
     <div class="front_content">
         <!-- header -->
-        {{-- @include('includes.front.header') --}}
+        @include('includes.front.header')
         <!-- End header -->
         <!-- page -->
         
-            <div class="container pt-2">
-                <h3 class="my-3">@yield('page_title')</h3>
+            <div class="" style="margin-top: 63px">
                 @include('includes.message')
                 @yield('page')
             </div>

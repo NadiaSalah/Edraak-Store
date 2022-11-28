@@ -22,7 +22,7 @@ class isAdmin
             return $next($request);
         } else {
             Session::flash('error', 'You are not Admin!');
-            return redirect()->back();
+            return redirect()->route('home');
         }
     }
 }

@@ -303,7 +303,11 @@
              @endforelse
          </div>
      </div>
-     <div class="my-5"> {{ $main_categories->links() }}</div>
+     <!--Pagination-->
+     <div class="mt-5 d-flex justify-content-center">
+        {!! $main_categories->links() !!}
+    </div>
+    <!--End Pagination-->
      <!--page-->
  @endsection
  @section('script')

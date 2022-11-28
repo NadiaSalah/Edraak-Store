@@ -20,9 +20,11 @@
         <div class="card mt-3">
             <h5 class="card-header">Product Title and Details</h5>
             <div class="card-body">
-                <h5 class="card-title">{{ $product->name }}</h5>
+                <h4 class="card-title text-primary"><span
+                    class="bg-info me-2 p-1 text-primary bg-opacity-25 rounded">
+                    ID:{{ $product->id }}</span><span>{{ $product->name }}</span></h4>
                 <p class="card-text">
-                <ul class="list-group list-group-flush py-3 w-100">
+                <ul class="list-group list-group-flush  w-100">
                     <li class="list-group-item">
                         <div class="">
                             <div class="mx-1 my-2 d-inline-block">
@@ -40,8 +42,8 @@
                                 @else
                                     <span class="bg-info p-2 text-dark bg-opacity-25 rounded-pill">
                                         <i class="fa-solid fa-dollar-sign"></i>
-                                        <span class="text-decoration-line-through">$ {{ $product->price }}</span>
-                                        <span> | $ {{ $product->price * (1 - $product->discount / 100) }}</span>
+                                        <span class="text-decoration-line-through">{{ $product->price }}</span>
+                                        <span>{{ $product->price * (1 - $product->discount / 100) }}</span>
                                         <span> | <i class="fa-solid fa-arrow-down"></i> {{ $product->discount }}
                                             %</span>
                                     </span>

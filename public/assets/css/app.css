@@ -8,7 +8,7 @@
   src: url(../fonts/SourceSansPro/SourceSansPro-Regular.ttf);
 }
 
-body{
+body {
   font-family: SignikaNegative;
-
+  position: relative;
 }

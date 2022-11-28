@@ -183,10 +183,10 @@ class ProductController extends Controller
         $products->discount = strip_tags($request->discount);
         if (strip_tags($request->return) == 'on') {
             $products->return = true;
-        }
+        }else{ $products->return = false;}
         if (strip_tags($request->view) == 'on') {
             $products->view = 'hot';
-        }
+        }else{ $products->view = 'normal';}
         $sizeID = array();
         if ($request->size) {
             foreach ($request->size as $item) {

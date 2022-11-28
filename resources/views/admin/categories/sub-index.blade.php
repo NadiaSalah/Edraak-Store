@@ -132,8 +132,12 @@
             @endforelse
         </div>
     </div>
+    <!--Pagination-->
+    <div class="mt-5 d-flex justify-content-center">
+        {!! $sub_categories->links() !!}
+    </div>
+    <!--End Pagination-->
     <!--page-->
-    <div class="my-5"> {{ $sub_categories->links() }}</div>
 @endsection
 @section('script')
     @parent

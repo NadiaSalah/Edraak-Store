@@ -29,6 +29,19 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [RedirectController::class, 'redirect'])->name('home');
+Route::get('/front', function () {
+  return view('front.home');
+})->name('website');
+
+Route::prefix('home')->group(function () {
+  Route::controller(FrontController::class)->group(function () {
+    Route::get('products/{id}', 'productShow')->name('productsFront.show');
+    Route::get('products.search', 'productsSearch')->name('ProductsFront.search');
+    Route::get('products.filter', 'productsFilter')->name('ProductsFront.filter');
+    Route::get('products/index/{m_id}/{s_id}', 'productsIndex')->name('ProductsFront.index');
+    
+  });
+});
 
 
 
@@ -75,9 +88,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 
 Route::prefix('user')->middleware(['auth', 'isUser'])->group(function () {
-
+  Route::resources([
+    'carts'=>CartController::class,
+    'addresses'=>AddressController::class,
+  ]);
 
   Route::controller(FrontController::class)->group(function () {
+    
   });
 });
 

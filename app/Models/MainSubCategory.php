@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MainSubCategory extends Model
 {
     use HasFactory;
-    
- 
-    
+
+
+
     protected $fillable = [
         'main_category_id',
         'sub_category_id'
@@ -25,5 +25,9 @@ class MainSubCategory extends Model
     {
         return $this->belongsTo(SubCategory::class);
     }
-    
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

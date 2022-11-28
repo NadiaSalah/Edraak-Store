@@ -4,15 +4,15 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item ">
-                    Archive Categories
+                Archive Categories
             </li>
             <li class="breadcrumb-item ">
                 <a class=" link-primary" href="{{ route('categories.archive') }}">
-                    Main >> 
+                    Main >>
                 </a>
             </li>
             <li class="breadcrumb-item mt-3 mt-sm-0">
-               
+
                 <span class=" badge text-bg-warning position-relative">sub
                     @if ($sub_categories != null)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -180,8 +180,12 @@
             @endforelse
         </div>
     </div>
+    <!--Pagination-->
+    <div class="mt-5 d-flex justify-content-center">
+        {!! $sub_categories->links() !!}
+    </div>
+    <!--End Pagination-->
     <!--page-->
-    <div class="my-5"> {{ $sub_categories->links() }}</div>
 @endsection
 @section('script')
     @parent

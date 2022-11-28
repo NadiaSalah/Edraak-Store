@@ -31,7 +31,11 @@
                                     <!--END Button-->
                                 </div>
                             </div>
-                            <h5 class="card-title text-primary">{{ substr($p_item->name, 0, 30) . '....' }}</h5>
+                            <h5 class="card-title text-primary"><span
+                                    class="bg-info me-2 p-1 text-primary bg-opacity-25 rounded">
+                                    ID:{{ $p_item->id }}</span>
+                                <span>{{ substr($p_item->name, 0, 30) . '....' }}</span>
+                            </h5>
                             <p class="card-text">{{ substr($p_item->description, 0, 50) . '....' }}</p>
                         </div>
                         <ul class="list-group list-group-flush py-3">
@@ -52,8 +56,8 @@
                                         @else
                                             <span class="bg-info p-2 text-dark bg-opacity-25 rounded-pill">
                                                 <i class="fa-solid fa-dollar-sign"></i>
-                                                <span class="text-decoration-line-through">$ {{ $p_item->price }}</span>
-                                                <span> | $ {{ $p_item->price * (1 - $p_item->discount / 100) }}</span>
+                                                <span class="text-decoration-line-through">{{ $p_item->price }}</span>
+                                                <span>{{ $p_item->price * (1 - $p_item->discount / 100) }}</span>
                                                 <span> | <i class="fa-solid fa-arrow-down"></i> {{ $p_item->discount }}
                                                     %</span>
                                             </span>
@@ -126,15 +130,18 @@
                             </div>
                         </div>
                         <!-- END Model -->
-
                     </div>
                 </div>
             @empty
                 <p>sorry, there are not Products</p>
             @endforelse
-            <div class="  my-5"> {{ $products->links() }}</div>
         </div>
     </div>
+    <!--Pagination-->
+    <div class="mt-5 d-flex justify-content-center">
+        {!! $products->links() !!}
+    </div>
+    <!--End Pagination-->
 @endsection
 <!--ENDpage-->
 @section('script')
@@ -145,5 +152,4 @@
             $('#products_link').addClass('active');
         });
     </script>
-
 @endsection

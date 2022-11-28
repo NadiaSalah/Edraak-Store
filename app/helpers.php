@@ -29,7 +29,25 @@ if (! function_exists('getproductCategories')) {
 if (! function_exists('getProducts')) {
   function getProducts()
   {
-    return Product::all();
+    return Product::paginate(6,['*'],'product');
+  }
+}
+
+if (! function_exists('getHotProducts')) {
+  function getHotProducts()
+  {
+    return Product::where('view','hot')
+                  ->where('quantity','!=',0)
+                  ->paginate(3,['*'],'hot');
+  }
+}
+
+if (! function_exists('getSaleProducts')) {
+  function getSaleProducts()
+  {
+    return Product::where('discount','!=',0)
+                  ->where('quantity','!=',0)
+                  ->paginate(3,['*'],'sale');
   }
 }
 
@@ -38,5 +56,7 @@ if (! function_exists('getSizes')) {
 {
   return Size::all();
 }
+
+
 }
 
