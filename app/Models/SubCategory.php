@@ -10,19 +10,30 @@ class SubCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
 
 
     protected $fillable = [
-        'name'        
+        'name'
     ];
 
-    public function mainCategories(){
-        return $this->belongsToMany(MainCategory::class,'main_sub_categories');
+    public function mainCategories()
+    {
+        return $this->belongsToMany(MainCategory::class, 'main_sub_categories');
     }
 
     public function mainSubCategories()
     {
         return $this->hasMany(MainSubCategory::class);
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(
+            Product::class,
+            MainSubCategory::class,
+            'sub_category_id',
+            'main_sub_category_id'
+        );
     }
 }

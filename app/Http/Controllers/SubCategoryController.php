@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MainCategory;
 use App\Models\MainSubCategory;
+use App\Models\Product;
 use App\Models\SubCategory;
+use Arr;
 use Illuminate\Http\Request;
 use Route;
 use Session;
@@ -80,9 +82,16 @@ class SubCategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(SubCategory $subCategory)
+    public function show($id)
     {
-        //
+        $products = SubCategory::findOrFail($id)->products()->paginate(6);
+        if ($products !== null && count($products) != 0) {
+            Session::flash('msg', 'All Products for sub category "' . SubCategory::findOrFail($id)->name . '"');
+            return view('admin.products.index', compact('products'));
+        } else {
+            Session::flash('error', 'Sorry No Products for sub category "' . SubCategory::findOrFail($id)->name . '"');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -136,11 +145,10 @@ class SubCategoryController extends Controller
                     }
                     $ms_item = MainSubCategory::where('main_category_id', $main_id)
                         ->where('sub_category_id', $id)->get();
-                    if ($ms_item->count()>0) {
+                    if ($ms_item->count() > 0) {
                         foreach ($ms_item as $item) {
                             $item->sub_category_id = $sub->id;
-                           $item->save();
-                         
+                            $item->save();
                         }
                     } else {
                         MainSubCategory::create([

@@ -66,7 +66,7 @@ class ProductController extends Controller
                 ->where('main_sub_category_id', $item->id)
                 ->first()
             ) {
-                Session::flash('error', 'Sorry, It is forbidden to repeat a product name in the same subcategory');
+                Session::flash('error', 'Sorry, It is forbidden to repeat a product name "'.$name.'" in the same subcategory "'.SubCategory::findOrFail($sub_category).'"');
                 return redirect()->back();
             }
         }
@@ -107,7 +107,7 @@ class ProductController extends Controller
             ]);
         }
 
-        Session::flash('msg', 'Storing The Product successfully');
+        Session::flash('msg', 'Storing The Product "'.$name.'" successfully');
         return redirect()->back();
     }
 
@@ -165,7 +165,7 @@ class ProductController extends Controller
                 if(Product::where('name', $name)
                 ->where('main_sub_category_id', $item->id)
                 ->first()->id != $products->id){
-                    Session::flash('error', 'Sorry, It is forbidden to repeat a product name in the same subcategory');
+                    Session::flash('error', 'Sorry, It is forbidden to repeat a product name "'.$name.'" in the same subcategory "'.SubCategory::findOrFail($sub_category).'"');
                     return redirect()->back();
                 } 
             }
@@ -215,7 +215,7 @@ class ProductController extends Controller
             }
         }
 
-        Session::flash('msg', 'Updating The Product successfully');
+        Session::flash('msg', 'Updating The Product "'.$name.'" successfully');
         return redirect()->back();
     }
 

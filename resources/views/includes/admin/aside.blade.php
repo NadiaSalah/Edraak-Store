@@ -29,7 +29,7 @@
                     </a>
                     <ul class="collapse px-5" id="categories">
                         <li><a class="dropdown-item py-2" href="{{ route('mainCategories.index') }}">Mangement</a></li>
-                        <li><a class="dropdown-item py-2" href="{{ route('categories.archive') }}">Archive</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('mainCategories.archive') }}">Archive</a></li>
                     </ul>
                 </li>
                 <li class="mt-1">

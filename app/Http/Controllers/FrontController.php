@@ -6,6 +6,7 @@ use App\Models\MainCategory;
 use App\Models\MainSubCategory;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Traits\CallFunTrait;
 use Illuminate\Http\Request;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 use Redirect;
@@ -13,28 +14,17 @@ use Session;
 
 class FrontController extends Controller
 {
+use CallFunTrait;
+
    public function productShow($id)
    {
       $product = Product::findOrFail($id);
       return view('front.products.show', compact('product'));
    }
 
-   public function productsIndex($m_id, $s_id)
+   public function categoryProductsIndex($m_id, $s_id)
    {
-      $m_name = MainCategory::findOrFail($m_id)->name;
-      $s_name = SubCategory::findOrFail($s_id)->name;
-      $m_s_id = MainSubCategory::where('main_category_id', $m_id)
-         ->where('sub_category_id', $s_id)
-         ->first()->id;
-      $p_categories = Product::where('main_sub_category_id', $m_s_id);
-      if (count($p_categories->get()) != 0) {
-         $products = $p_categories->paginate(6, ['*'], 'product');
-         Session::flash('msg', 'All products for the selected category: ' . $m_name . '/' . $s_name);
-         return view('front.products.index', compact('products'));
-      } else {
-         Session::flash('error', 'Sorry,No products for the selected category: ' . $m_name . '/' . $s_name);
-         return redirect()->route('website');
-      }
+      return $this->categoryProducts($m_id, $s_id,'front.products.index');
    }
 
    public function productsSearch(Request $request)

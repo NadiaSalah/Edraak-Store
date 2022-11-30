@@ -36,42 +36,59 @@
                     <label class="form-label">Product Image</label>
                     <input name="image" class="form-control" type="file" id="inputImg" required>
                 </div>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
+                @isset($category)
                     <div class="mb-3">
                         <label class="form-label">Main Category</label>
-                        <select name="main_category" class="form-select" size="3" value="{{ old('main') }}"
+                        <select name="main_category" class="form-select" size="1" value="{{ $category['main_id'] }}"
                             required>
-                            @forelse (getMaincategories() as $m_item)
-                                <option class="main collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
-                                    aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}">
-                                    {{ $m_item->name }}
-                                </option>
-                            @empty
-                            @endforelse
+                            <option value="{{ $category['main_id'] }}" selected>{{ $category['main_name'] }}</option>
                         </select>
                     </div>
-                    @forelse (getMaincategories() as $m_item)
-                        <div id="flush-collapseX{{ $m_item->id }}" class=" mb-3 accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
-                            <div class="overflow-auto border p-2 rounded" style="height: 90px;">
-                                @forelse ($m_item->subCategories as $s_item)
-                                    <div class="form-check form-check">
-                                        <input class="sub form-check-input" type="radio" name="sub_category"
-                                            value="{{ $s_item->id }}" required>
-                                        <label class="form-check-label">{{ $s_item->name }}</label>
-                                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sub Category</label>
+                        <select name="sub_category" class="form-select" size="1" value="{{ $category['sub_id'] }}"
+                            required>
+                            <option value="{{ $category['sub_id'] }}" selected>{{ $category['sub_name'] }}</option>
+                        </select>
+                    </div>
+                @else
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="mb-3">
+                            <label class="form-label">Main Category</label>
+                            <select name="main_category" class="form-select" size="3" value="{{ old('main_category') }}"
+                                required>
+                                @forelse (getMaincategories() as $m_item)
+                                    <option class="main collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
+                                        aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}">
+                                        {{ $m_item->name }}
+                                    </option>
                                 @empty
                                 @endforelse
-                            </div>
+                            </select>
                         </div>
-                    @empty
-                    @endforelse
-                </div>
+                        @forelse (getMaincategories() as $m_item)
+                            <div id="flush-collapseX{{ $m_item->id }}" class=" mb-3 accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
+                                <div class="overflow-auto border p-2 rounded" style="height: 90px;">
+                                    @forelse ($m_item->subCategories as $s_item)
+                                        <div class="form-check form-check">
+                                            <input class="sub form-check-input" type="radio" name="sub_category"
+                                                value="{{ $s_item->id }}" required>
+                                            <label class="form-check-label">{{ $s_item->name }}</label>
+                                        </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
+                    </div>
+                @endisset
                 <div class="mb-3">
                     <label class="form-label">Sizes</label>
-                    <select name="size[]" class="form-select" size="3" multiple value="{{ old('size') }}">
+                    <select name="size[]" class="form-select" size="3" multiple value="{{ old('size[]') }}">
                         @forelse (getSizes() as $item)
                             @if ($item->name != 'no')
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -132,7 +149,7 @@
                 if (file) {
                     var reader = new FileReader();
                     reader.onload = function() {
-                        $('#previewImg').css('background-image','url("' +  reader.result +'")');  
+                        $('#previewImg').css('background-image', 'url("' + reader.result + '")');
                     }
                     reader.readAsDataURL(file);
                 }

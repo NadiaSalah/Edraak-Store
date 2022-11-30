@@ -6,14 +6,16 @@ use App\Models\MainSubCategory;
 use App\Models\MainCategory;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Traits\CallFunTrait;
 use Illuminate\Http\Request;
 use Session;
 
 class AdminController extends Controller
 {
 
+use CallFunTrait;
 
-  public function categorieSsearch(Request $request)
+  public function categoriesSearch(Request $request)
   {
     $search = strip_tags($request->input('search'));
     if ($search != '' && strlen($search) > 2) {
@@ -26,7 +28,7 @@ class AdminController extends Controller
           Session::flash('msg', ' successfull Searching for Main Category ');
           return view('admin.categories.index', compact('main_categories'));
         } else {
-          Session::flash('error', 'Sorry , No searching result');
+          Session::flash('error', 'Sorry , No searching result for : ' . $search);
           return redirect()->back();
         }
       } elseif ($request->searchBy == 'sub') {
@@ -34,12 +36,11 @@ class AdminController extends Controller
           ->orderBy('name')
           ->paginate(6);
         $sub_categories->appends($request->all());
-
         if ($sub_categories != null &&  $sub_categories->count() > 0) {
-          Session::flash('msg', ' successfull Searching for Main Category ');
+          Session::flash('msg', ' successfull Searching for Main Category with : ' . $search);
           return view('admin.categories.sub-index', compact('sub_categories'));
         } else {
-          Session::flash('error', 'Sorry , No searching result');
+          Session::flash('error', 'Sorry , No searching result for : ' . $search);
           return redirect()->back();
         }
       }
@@ -49,7 +50,7 @@ class AdminController extends Controller
     }
   }
 
-  public function mainSubDestroy($s_id, $m_id)
+  public function categoryDestroy($s_id, $m_id)
   {
     $del = MainSubCategory::where('main_category_id', $m_id)
       ->where('sub_category_id', $s_id)->first();
@@ -63,27 +64,44 @@ class AdminController extends Controller
   }
 
 
-  public function productsSearch(Request $request){
+  public function productsSearch(Request $request)
+  {
     $search = strip_tags($request->input('search'));
-    if ($search!='' && strlen($search) >2) {
-        $products = Product::where('name', 'like', "%$search%")
-            ->orderBy('name')
-            ->paginate(15);
-            $products->appends($request->all());
-
-            if ($products != null &&  $products->count() > 0) {
-              Session::flash('msg', ' successfull Searching for Product ');
-              return view('admin.products.index', compact('products'));
-            } else {
-              Session::flash('error', 'Sorry , No searching result');
-              return redirect()->back();
-            }
-
+    if ($search != '' && strlen($search) > 2) {
+      $products = Product::where('name', 'like', "%$search%")
+        ->orderBy('name')
+        ->paginate(15);
+      $products->appends($request->all());
+      if ($products != null &&  $products->count() > 0) {
+        Session::flash('msg', ' successfull Searching for Product with  : ' . $search);
+        return view('admin.products.index', compact('products'));
+      } else {
+        Session::flash('error', 'Sorry , No searching result for: ' . $search);
+        return redirect()->back();
+      }
     } else {
-        Session::flash('error','the searching word is very small " length >2 char "');
-        return redirect()->route('products.index');
+      Session::flash('error', 'the searching word "' . $search . '" is very small " length >2 char "');
+      return redirect()->route('products.index');
     }
+  }
 
 
+  public function categoryProductCreate($m_id, $s_id)
+  {
+    $main_name = MainCategory::findOrFail($m_id)->name;
+    $sub_name = SubCategory::findOrFail($s_id)->name;
+    $category = [
+      'main_id' => $m_id,
+      'main_name' => $main_name,
+      'sub_id' => $s_id,
+      'sub_name' => $sub_name,
+    ];
+    Session::flash('msg', 'Create a Product for : ' . $main_name . '/' . $sub_name);
+    return view('admin.products.create', compact('category'));
+  }
+
+  public function categoryProductsIndex($m_id, $s_id)
+  {
+    return $this->categoryProducts($m_id, $s_id,'admin.products.index');
   }
 }

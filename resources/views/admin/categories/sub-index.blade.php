@@ -29,7 +29,8 @@
                 <div class="accordion-item">
                     <div class="accordion-header accordion-button " id="headingX{{ $sub_item->id }}">
                         <div class="row w-100">
-                            <h4 class='col-12 col-sm  align-self-start'>{{ $sub_item->name }}
+                            <h4 class='col-12 col-sm  align-self-start'>
+                                <a href="{{route('subCategories.show', $sub_item->id)}}">{{ $sub_item->name }}</a>
                             </h4>
                             <div class="btn-group col-auto align-self-end" role="group">
                                 <!-- Button trigger Delete subCategory modal-->

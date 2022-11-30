@@ -7,7 +7,7 @@
                 Archive Categories
             </li>
             <li class="breadcrumb-item ">
-                <a class=" link-primary" href="{{ route('categories.archive') }}">
+                <a class=" link-primary" href="{{ route('mainCategories.archive') }}">
                     Main >>
                 </a>
             </li>
@@ -115,7 +115,6 @@
                         </div>
                     </div>
                     <!-- END Model -->
-
                     <!-- restore subCategory Modal -->
                     <div class="modal fade" id="restore_subCategoryX{{ $sub_item->id }}" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">

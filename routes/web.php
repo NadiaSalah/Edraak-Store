@@ -38,7 +38,7 @@ Route::prefix('home')->group(function () {
     Route::get('products/{id}', 'productShow')->name('productsFront.show');
     Route::get('products.search', 'productsSearch')->name('ProductsFront.search');
     Route::get('products.filter', 'productsFilter')->name('ProductsFront.filter');
-    Route::get('products/index/{m_id}/{s_id}', 'productsIndex')->name('ProductsFront.index');
+    Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('ProductsFront.index');
     
   });
 });
@@ -60,7 +60,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
 
   Route::controller(MainCategoryController::class)->group(function () {
-    Route::get('categories/archive', 'archive')->name('categories.archive');
+    Route::get('mainCategories/archive', 'archive')->name('mainCategories.archive');
     Route::get('mainCategories.restoreAll', 'restoreAll')->name('mainCategories.restoreAll');
     Route::get('mainCategories/restore/{id}', 'restore')->name('mainCategories.restore');
     Route::get('mainCategories.forceDeleteAll', 'forceDeleteAll')->name('mainCategories.forceDeleteAll');
@@ -76,8 +76,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
   });
 
   Route::controller(AdminController::class)->group(function () {
-    Route::get('categories.search', 'categorieSsearch')->name('categories.search');
-    Route::get('subCategories/destroy/{s_id}/{m_id}', 'mainSubDestroy')->name('mainSubCategories.destroy');
+    Route::get('categories.search', 'categoriesSearch')->name('categories.search');
+    Route::get('categories/destroy/{s_id}/{m_id}', 'categoryDestroy')->name('categories.destroy');
+    Route::get('categories/products/create/{m_id}/{s_id}','categoryProductCreate')->name('categoryProducts.create');
+    Route::get('categories/products/{m_id}/{s_id}','categoryProductsIndex')->name('categoryProducts.index');
     Route::get('dashboard/reports', 'dashboardReports')->name('dashboard.reports');
     Route::get('dashboard/setting', 'dashboardSetting')->name('dashboard.setting');
     Route::get('products.search', 'productsSearch')->name('products.search');

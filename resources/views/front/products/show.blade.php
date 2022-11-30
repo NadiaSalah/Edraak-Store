@@ -28,7 +28,7 @@
                                                 <i class="fa-solid fa-dollar-sign"></i>
                                                 <span class="text-decoration-line-through">{{ $product->price }}</span>
                                                 <span class="px-1">
-                                                    {{ $product->price * (1 - $product->discount / 100) }}</span>   
+                                                    {{ $product->price * (1 - $product->discount / 100) }}</span>
                                             </span>
                                         @endif
                                         <input name="productID" value="{{ $product->id }}" hidden required>
@@ -78,9 +78,8 @@
                         <div class="">
                             <div class="mx-1 my-2 d-inline-block">
                                 <span class="bg-primary p-2 text-primary bg-opacity-25 rounded-pill">
-                                    <i class="fa-solid fa-tags"></i>
-                                    {{ getproductCategories($product->main_sub_category_id)->mainCategory->name }}
-                                    | {{ getproductCategories($product->main_sub_category_id)->subCategory->name }}
+                                    {{ $product->mainSubCategory->mainCategory->name }}
+                                    / {{ $product->mainSubCategory->subCategory->name }}
                                 </span>
                             </div>
                             <div class="mx-1 my-2 d-inline-block">
