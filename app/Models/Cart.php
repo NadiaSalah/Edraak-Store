@@ -11,17 +11,14 @@ class Cart extends Model
     protected  $fillable = [
         'user_id',
         'product_size_id',
-        'price',
-        'quantity',
-        'total_price'
+        'quantity',    
     ];
 
     public function user(){
        return $this->belongsTo(User::class);
     }
-
-    public function productSize()
-    {
-        return $this->belongsTo(ProductSize::class);
+    public function productSize(){
+        return $this->belongsTo(ProductSizeItem::class);
     }
+
 }

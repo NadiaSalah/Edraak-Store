@@ -22,7 +22,7 @@ class OrderDetail extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function productSize(){
-        return $this->belongsTo(ProductSize::class);
+    public function productSizeItem(){
+        return $this->belongsTo(ProductSizeItem::class);
     }
 }

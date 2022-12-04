@@ -66,7 +66,7 @@ class ProductController extends Controller
                 ->where('main_sub_category_id', $item->id)
                 ->first()
             ) {
-                Session::flash('error', 'Sorry, It is forbidden to repeat a product name "'.$name.'" in the same subcategory "'.SubCategory::findOrFail($sub_category).'"');
+                Session::flash('error', 'Sorry, It is forbidden to repeat a product name "' . $name . '" in the same subcategory "' . SubCategory::findOrFail($sub_category) . '"');
                 return redirect()->back();
             }
         }
@@ -107,7 +107,7 @@ class ProductController extends Controller
             ]);
         }
 
-        Session::flash('msg', 'Storing The Product "'.$name.'" successfully');
+        Session::flash('msg', 'Storing The Product "' . $name . '" successfully');
         return redirect()->back();
     }
 
@@ -160,14 +160,16 @@ class ProductController extends Controller
         foreach ($main_sub as $item) {
             if (Product::where('name', $name)
                 ->where('main_sub_category_id', $item->id)
-                ->first() 
+                ->first()
             ) {
-                if(Product::where('name', $name)
-                ->where('main_sub_category_id', $item->id)
-                ->first()->id != $products->id){
-                    Session::flash('error', 'Sorry, It is forbidden to repeat a product name "'.$name.'" in the same subcategory "'.SubCategory::findOrFail($sub_category).'"');
+                if (
+                    Product::where('name', $name)
+                    ->where('main_sub_category_id', $item->id)
+                    ->first()->id != $products->id
+                ) {
+                    Session::flash('error', 'Sorry, It is forbidden to repeat a product name "' . $name . '" in the same subcategory "' . SubCategory::findOrFail($sub_category) . '"');
                     return redirect()->back();
-                } 
+                }
             }
         }
 
@@ -183,10 +185,14 @@ class ProductController extends Controller
         $products->discount = strip_tags($request->discount);
         if (strip_tags($request->return) == 'on') {
             $products->return = true;
-        }else{ $products->return = false;}
+        } else {
+            $products->return = false;
+        }
         if (strip_tags($request->view) == 'on') {
             $products->view = 'hot';
-        }else{ $products->view = 'normal';}
+        } else {
+            $products->view = 'normal';
+        }
         $sizeID = array();
         if ($request->size) {
             foreach ($request->size as $item) {
@@ -195,27 +201,25 @@ class ProductController extends Controller
         }
 
         $products->update();
+        foreach($products->productSizeItems as $ps_item){
+            $ps_item->forceDelete();
+        }
+        
         if ($sizeID != null && count($sizeID) > 0) {
             foreach ($sizeID as $item) {
-                if (!(ProductSizeItem::where('product_id', $products->id)
-                    ->where('size_id', $item))) {
-                    ProductSizeItem::create([
-                        'product_id' => $products->id,
-                        'size_id' => Size::findOrFail($item)->id
-                    ]);
-                }
-            }
-        } else {
-            if (!(ProductSizeItem::where('product_id', $products->id)
-                ->where('size_id', $item))) {
                 ProductSizeItem::create([
                     'product_id' => $products->id,
-                    'size_id' => Size::where('name', 'no')->first()->id
+                    'size_id' => Size::findOrFail($item)->id
                 ]);
             }
+        } else {
+            ProductSizeItem::create([
+                'product_id' => $products->id,
+                'size_id' => Size::where('name', 'no')->first()->id
+            ]);
         }
 
-        Session::flash('msg', 'Updating The Product "'.$name.'" successfully');
+        Session::flash('msg', 'Updating The Product "' . $name . '" successfully');
         return redirect()->back();
     }
 

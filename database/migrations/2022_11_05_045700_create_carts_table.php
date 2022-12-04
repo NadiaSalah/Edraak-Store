@@ -17,16 +17,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('product_size_id')
                 ->constrained('product_size_items')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->decimal('price',8,2);
             $table->integer('quantity');
-            $table->decimal('total_price',8,2);
         });
     }
 

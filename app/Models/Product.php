@@ -21,18 +21,32 @@ class Product extends Model
         'view',
         'return',
         'main_sub_category_id',
-       
     ];
 
-    public function MainSubCategory(){
+    public function MainSubCategory()
+    {
         return $this->belongsTo(MainSubCategory::class);
     }
 
-    public function sizes(){
-        return $this->belongsToMany(Size::class,'product_size_items');
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_size_items');
     }
 
-    public function productAlerts(){
+    public function productAlerts()
+    {
         return $this->hasMany(ProductAlert::class);
+    }
+    public function productSizeItems()
+    {
+        return $this->hasMany(ProductSizeItem::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasManyThrough(
+            OrderDetail::class,
+            ProductSizeItem::class,
+        );
     }
 }

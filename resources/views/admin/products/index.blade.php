@@ -44,8 +44,8 @@
                                     <div class="mx-1 my-2 d-inline-block">
                                         <span class="bg-primary p-2 text-primary bg-opacity-25 rounded-pill">
                                             <i class="fa-solid fa-tags"></i>
-                                            {{ getproductCategories($p_item->main_sub_category_id)->mainCategory->name }}
-                                            | {{ getproductCategories($p_item->main_sub_category_id)->subCategory->name }}
+                                            {{ $p_item->mainSubCategory->mainCategory->name }}
+                                    / {{ $p_item->mainSubCategory->subCategory->name }}
                                         </span>
                                     </div>
                                     <div class="mx-1 my-2 d-inline-block">

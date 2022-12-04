@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MainCategory;
-use App\Models\MainSubCategory;
+
 use App\Models\Product;
-use App\Models\SubCategory;
 use App\Traits\CallFunTrait;
+use Auth;
 use Illuminate\Http\Request;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
-use Redirect;
 use Session;
 
 class FrontController extends Controller
 {
-use CallFunTrait;
+   use CallFunTrait;
 
+   //------website--------
+   public function viewPolicy()
+   {
+      return view('front.home.policy');
+   }
    public function productShow($id)
    {
       $product = Product::findOrFail($id);
@@ -24,7 +26,7 @@ use CallFunTrait;
 
    public function categoryProductsIndex($m_id, $s_id)
    {
-      return $this->categoryProducts($m_id, $s_id,'front.products.index');
+      return $this->categoryProducts($m_id, $s_id, 'front.products.index');
    }
 
    public function productsSearch(Request $request)
@@ -46,5 +48,13 @@ use CallFunTrait;
          Session::flash('error', 'the searching word is very small " length >2 char "');
          return redirect()->back();
       }
+   }
+
+   //------ user--------
+
+   public function userProfile()
+   { // $user=User::findOrFail(Auth::User()->id);
+      $user = Auth::user();
+      return view('front.users.profile', compact('user'));
    }
 }

@@ -55,9 +55,9 @@ Put an X between the brackets for each feature that has been developed and teste
 - [x] The customer should be able to view a specific product’s details.
 - [x] The customer should be able to register an account on the website.
 - [x] The customer should be able to log into their account on the website.
-- [ ] The logged-in customer should be able to add a product to their shopping cart.
-- [ ] The logged-in customer should be able to view the products added to their cart.
-- [ ] The logged-in customer should be able to remove a product that was added to their shopping cart.
+- [x] The logged-in customer should be able to add a product to their shopping cart.
+- [x] The logged-in customer should be able to view the products added to their cart.
+- [x] The logged-in customer should be able to remove a product that was added to their shopping cart.
 - [ ] The logged-in customer should be able to complete their order by entering their shipping information and confirming their order.
 - [ ] The logged-in customer should be able to view a list of their orders and their statuses.
 - [ ] The logged-in customer should be able to view the details of their orders.

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\MainCategory;
+
 use Illuminate\Database\Seeder;
 
 
@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        //     'first_name' => 'edraak',
+        //     'last_name' => 'store',
+        //     'email' => 'user@edraakstore.com',
         // ]);
 
         $this->call([
@@ -29,8 +30,9 @@ class DatabaseSeeder extends Seeder
             MainCategorySeeder::class, //add main categories in database automatically 
             SubCategorySeeder::class, //add sub categories in database automatically 
             MainSubCategorySeeder::class, //add main_sub categories in database automatically 
-            SizeSeeder::class, //add sizes categories in database automatically 
-
+            ProductSeeder::class,//add Products in database automatically  
+            SizeSeeder::class, //add sizes in database automatically
+            ProductSizeItemSeeder::class,//add Product sizes in database automatically 
         ]);
     }
 }

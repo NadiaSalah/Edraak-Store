@@ -9,6 +9,7 @@
 <body>
   @yield('content')
   @include('includes.script')
+  @include('includes.copyright')
   @yield('script')
 </body>
 </html>

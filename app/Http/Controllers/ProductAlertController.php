@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductAlert;
+use Auth;
 use Illuminate\Http\Request;
 
 class ProductAlertController extends Controller
@@ -35,7 +37,15 @@ class ProductAlertController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'alert' => ['required','string','max:255']
+        ]);
+        $product = Product::findOrfail(strip_tags($request->productID));
+        ProductAlert::create([
+            'alert' => strip_tags($request->alert),
+            'user_id' => Auth::User()->id,
+            'product_id' => $product->id,
+        ]);
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\ProductAlert;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +27,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-
-
-Route::get('/', [RedirectController::class, 'redirect'])->name('home');
-Route::get('/front', function () {
-  return view('front.home');
-})->name('website');
+Route::controller(RedirectController::class)->group(function () {
+  Route::get('/', 'redirect')->name('home');
+  Route::get('/front', 'website')->name('website');
+  Route::get('admin/welcome', 'adminWelcome')->name('admin.welcome');
+});
 
 Route::prefix('home')->group(function () {
   Route::controller(FrontController::class)->group(function () {
@@ -39,26 +39,17 @@ Route::prefix('home')->group(function () {
     Route::get('products.search', 'productsSearch')->name('ProductsFront.search');
     Route::get('products.filter', 'productsFilter')->name('ProductsFront.filter');
     Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('ProductsFront.index');
-    
+    Route::get('policy','viewPolicy')->name('policy');
   });
 });
 
-
-
-
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
-
   Route::resources([
     'mainCategories' => MainCategoryController::class,
     'subCategories' => SubCategoryController::class,
     'products' => ProductController::class,
     'orders' => OrderController::class,
   ]);
-  Route::get('welcome', function () {
-    return view('admin.welcome');
-  })->name('admin.welcome');
-
-
   Route::controller(MainCategoryController::class)->group(function () {
     Route::get('mainCategories/archive', 'archive')->name('mainCategories.archive');
     Route::get('mainCategories.restoreAll', 'restoreAll')->name('mainCategories.restoreAll');
@@ -66,7 +57,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('mainCategories.forceDeleteAll', 'forceDeleteAll')->name('mainCategories.forceDeleteAll');
     Route::get('mainCategories/forceDelete/{id}', 'forceDelete')->name('mainCategories.forceDelete');
   });
-
   Route::controller(SubCategoryController::class)->group(function () {
     Route::get('subCategories.archive', 'archive')->name('subCategories.archive');
     Route::get('subCategories.restoreAll', 'restoreAll')->name('subCategories.restoreAll');
@@ -74,12 +64,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('subCategories.forceDeleteAll', 'forceDeleteAll')->name('subCategories.forceDeleteAll');
     Route::get('subCategories/forceDelete/{id}', 'forceDelete')->name('subCategories.forceDelete');
   });
-
   Route::controller(AdminController::class)->group(function () {
     Route::get('categories.search', 'categoriesSearch')->name('categories.search');
     Route::get('categories/destroy/{s_id}/{m_id}', 'categoryDestroy')->name('categories.destroy');
-    Route::get('categories/products/create/{m_id}/{s_id}','categoryProductCreate')->name('categoryProducts.create');
-    Route::get('categories/products/{m_id}/{s_id}','categoryProductsIndex')->name('categoryProducts.index');
+    Route::get('categories/products/create/{m_id}/{s_id}', 'categoryProductCreate')->name('categoryProducts.create');
+    Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('categoryProducts.index');
     Route::get('dashboard/reports', 'dashboardReports')->name('dashboard.reports');
     Route::get('dashboard/setting', 'dashboardSetting')->name('dashboard.setting');
     Route::get('products.search', 'productsSearch')->name('products.search');
@@ -91,12 +80,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
 Route::prefix('user')->middleware(['auth', 'isUser'])->group(function () {
   Route::resources([
-    'carts'=>CartController::class,
-    'addresses'=>AddressController::class,
+    'carts' => CartController::class,
+    'addresses' => AddressController::class,
+    'productalerts' => ProductAlert::class,
   ]);
-
   Route::controller(FrontController::class)->group(function () {
-    
+    Route::get('profile', 'userProfile')->name('users.profile');
   });
 });
 

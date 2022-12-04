@@ -9,15 +9,15 @@
         </div>
         <div class="card  mt-3">
             <div class="card-header bg-primary text-light">
-                Add to cart
+                Actions
             </div>
             <div class="card-body bg-primary bg-opacity-25">
                 <blockquote class="blockquote mb-0">
                     <div class="container py-2 m-auto" style="width: 25rem; max-width:100%;">
                         @if ($product->quantity != 0)
                             <div>
-                                <form acrtion="{{ route('carts.store') }}" method="POST">
-                                    @csrf
+                                <form action="{{ route('carts.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf                                
                                     <div class="input-group mb-3 text-wrap ">
                                         @if ($product->discount == 0)
                                             <span class="input-group-text bg-success text-light">
@@ -32,10 +32,26 @@
                                             </span>
                                         @endif
                                         <input name="productID" value="{{ $product->id }}" hidden required>
-                                        <input name="number" type="number" min="1" step="1"
+                                        <input name="quantity" type="number" min="1" step="1"
                                             max={{ $product->quantity }} class="form-control" placeholder="Product Numbers">
-                                        <button class="btn btn-outline-primary" type="button"><i
-                                                class="fa-solid fa-cart-plus"></i></button>
+                                        <button class="btn btn-outline-primary" type="submit"><i
+                                                class="fa-solid fa-cart-plus"></i> Add to cart</button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <select class="form-select" name="sizeID" required>
+                                            @forelse ($product->sizes as $item)
+                                                @php $size_test = $item->name == 'no' ? true : false ; @endphp
+                                                <option value="{{ $item->id }}" @selected($size_test)>
+                                                    @if ($size_test)
+                                                        No Sizes
+                                                    @else
+                                                        {{ $item->name }}
+                                                    @endif
+                                                </option>
+                                                @break($size_test)
+                                            @empty
+                                            @endforelse
+                                        </select>
                                     </div>
                                 </form>
                             </div>
@@ -45,7 +61,45 @@
                             </div>
                         @endif
                     </div>
-                    <footer class="blockquote-footer">Product : Add to your cart</footer>
+                    <div class="mx-3 my-4 text-end">
+                        <!-- Button trigger create product alert modal -->
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#create_productAlert">
+                            <i class="fa-solid fa-folder-plus"></i> Add alert
+                        </button>
+                    </div>
+                        <!-- Button trigger modal -->
+                        <!-- creat product alert Modal -->
+                        <div class="modal fade" id="create_productAlert" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-warning">
+                                        <h1 class="modal-title fs-5">Add Alert for product : {{ $product->name }}</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('productalerts.store') }}" method="post">
+                                        @csrf
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <input name="productID" type="text" value="{{ $product->id }}" hidden required>
+                                            <label class="form-label">Product alert</label>
+                                            <input name="alert" type="text" class="form-control"
+                                                placeholder="write the alert !" value="{{old('alert')}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Done</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    <footer class="blockquote-footer">Product : Add to your cart , add alert</footer>
                 </blockquote>
             </div>
         </div>

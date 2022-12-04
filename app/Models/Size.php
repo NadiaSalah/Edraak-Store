@@ -15,4 +15,7 @@ class Size extends Model
     public function products(){
         return $this->belongsToMany(Product::class,'product_size_items');
     }
+    public function productSizeItems(){
+        return $this->hasMany(ProductSizeItem::class);
+    }
 }

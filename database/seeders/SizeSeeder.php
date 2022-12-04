@@ -17,6 +17,9 @@ class SizeSeeder extends Seeder
     public function run()
     {
         DB::table('sizes')->insert([
+            'name'=>'no'  
+        ]);
+        DB::table('sizes')->insert([
             'name'=>'S'  
         ]);
         DB::table('sizes')->insert([
@@ -31,8 +34,6 @@ class SizeSeeder extends Seeder
         DB::table('sizes')->insert([
             'name'=>'XXL'  
         ]);
-        DB::table('sizes')->insert([
-            'name'=>'no'  
-        ]);
+        
     }
 }

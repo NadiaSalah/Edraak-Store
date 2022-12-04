@@ -17,14 +17,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('product_id')
-                  ->constrained('products')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();                  
+                ->constrained('products')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('size_id')
-                  ->constrained('sizes')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate()
-                  ->nullable(); // null for products have not size            
+                ->constrained('sizes')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->softDeletes();
         });
     }

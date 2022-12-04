@@ -12,17 +12,61 @@
 <!--page-->
 @section('page')
     <div class="container my-5">
-        <div class="card  shadow-sm m-auto my-5 " style="width: 25rem; max-width:100%;" >
+        <div class="card  shadow-sm m-auto my-5 " style="width: 25rem; max-width:100%;">
             <div class=" card-img-top rounded"
                 style="min-height:400px; background: url({{ asset($product->image) }}) no-repeat scroll center ; background-size: cover;">
             </div>
         </div>
+        <div class="card  mt-3">
+            <div class="card-header">
+                Actions
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div class="text-end mb-2">
+                        <div class="btn-group" role="group">
+                            <!-- Button trigger delet product modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#delete_productX{{ $product->id }}">
+                                <i class="fa-solid fa-trash"></i> Delete</button>
+                            <!--END Button-->
+                            <!-- Button Edit product -->
+                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning"">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <!--END Button-->
+                        </div>
+                    </div>
+                    <footer class="blockquote-footer">Product : Delete,Edit</footer>
+                </blockquote>
+                <!-- Delete product Modal -->
+                <div class="modal fade" id="delete_productX{{ $product->id }}" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    Danger! Are you sure to deleteing the product "{{ $product->name }}"
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                                <form class="btn" action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card mt-3">
             <h5 class="card-header">Product Title and Details</h5>
             <div class="card-body">
-                <h4 class="card-title text-primary"><span
-                    class="bg-info me-2 p-1 text-primary bg-opacity-25 rounded">
-                    ID:{{ $product->id }}</span><span>{{ $product->name }}</span></h4>
+                <h4 class="card-title text-primary"><span class="bg-info me-2 p-1 text-primary bg-opacity-25 rounded">
+                        ID:{{ $product->id }}</span><span>{{ $product->name }}</span></h4>
                 <p class="card-text">
                 <ul class="list-group list-group-flush  w-100">
                     <li class="list-group-item">
@@ -30,8 +74,8 @@
                             <div class="mx-1 my-2 d-inline-block">
                                 <span class="bg-primary p-2 text-primary bg-opacity-25 rounded-pill">
                                     <i class="fa-solid fa-tags"></i>
-                                    {{ getproductCategories($product->main_sub_category_id)->mainCategory->name }}
-                                    | {{ getproductCategories($product->main_sub_category_id)->subCategory->name }}
+                                    {{ $product->mainSubCategory->mainCategory->name }}
+                                    / {{ $product->mainSubCategory->subCategory->name }}
                                 </span>
                             </div>
                             <div class="mx-1 my-2 d-inline-block">
@@ -105,51 +149,7 @@
                 <p class="card-text">{{ $product->description }}</p>
             </div>
         </div>
-        <div class="card  mt-3">
-            <div class="card-header">
-                Actions
-            </div>
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <div class="text-end mb-2">
-                        <div class="btn-group" role="group">
-                            <!-- Button trigger delet product modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete_productX{{ $product->id }}">
-                                <i class="fa-solid fa-trash"></i></button>
-                            <!--END Button-->
-                            <!-- Button Edit product -->
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning"">
-                                <i class="fa-solid fa-pen-to-square"></i></a>
-                            <!--END Button-->
-                        </div>
-                    </div>
-                    <footer class="blockquote-footer">Product : Delete,Edit</footer>
-                </blockquote>
-                <!-- Delete product Modal -->
-                <div class="modal fade" id="delete_productX{{ $product->id }}" data-bs-backdrop="static"
-                    data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="alert alert-danger" role="alert">
-                                    Danger! Are you sure to deleteing the product "{{ $product->name }}"
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
-                                <form class="btn" action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
     </div>
 @endsection
 <!--ENDpage-->

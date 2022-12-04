@@ -41,30 +41,30 @@
                     <div class="mb-3">
                         <label class="form-label">Main Category</label>
                         <select name="main_category" class="form-select" size="3"
-                            value="{{ getproductCategories($products->main_sub_category_id)->main_category_id }}" required>
+                            value="{{ $products->mainSubCategory->mainCategory->id }}" required>
                             @forelse (getMaincategories() as $m_item)
                                 <option class="main collapsed" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
                                     aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}"
-                                    @if (getproductCategories($products->main_sub_category_id)->main_category_id == $m_item->id) selected @endif> {{ $m_item->name }}
+                                    @selected( $products->mainSubCategory->mainCategory->id == $m_item->id)> {{ $m_item->name }}
                                 </option>
                             @empty
                             @endforelse
                         </select>
                         <div class="form-text text-primary">old value:
-                            {{ getproductCategories($products->main_sub_category_id)->mainCategory->name }}
+                            {{ $products->mainSubCategory->mainCategory->name }}
                         </div>
                     </div>
                     @forelse (getMaincategories() as $m_item)
                         <div id="flush-collapseX{{ $m_item->id }}"
-                            class=" mb-3 accordion-collapse collapse  @if (getproductCategories($products->main_sub_category_id)->main_category_id == $m_item->id) show @endif"
+                            class=" mb-3 accordion-collapse collapse  @if ( $products->mainSubCategory->mainCategory->id == $m_item->id) show @endif"
                             data-bs-parent="#accordionFlushExample">
                             <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
                             <div class="overflow-auto border p-2 rounded" style="height: 90px;">
                                 @forelse ($m_item->subCategories as $s_item)
                                     <div class="form-check form-check">
                                         <input
-                                            class="sub form-check-input @if (getproductCategories($products->main_sub_category_id)->sub_category_id == $s_item->id) sub_checked @endif"
+                                            class="sub form-check-input @if ($products->mainSubCategory->subCategory->id == $s_item->id) sub_checked @endif"
                                             type="radio" name="sub_category" value="{{ $s_item->id }}" required>
                                         <label class="form-check-label">{{ $s_item->name }}</label>
                                     </div>
@@ -72,7 +72,7 @@
                                 @endforelse
                             </div>
                             <div class="form-text text-primary">old value:
-                                {{ getproductCategories($products->main_sub_category_id)->subCategory->name }}
+                                {{$products->mainSubCategory->subCategory->name }}
                             </div>
                         </div>
                     @empty
@@ -84,7 +84,7 @@
                         @forelse (getSizes() as $item)
                             @if ($item->name != 'no')
                                 <option value="{{ $item->id }}"
-                                    @forelse($products->sizes as $sz_item) @if ($sz_item->name == $item->name) selected @endif
+                                    @forelse($products->sizes as $sz_item) @selected($sz_item->name == $item->name)
                                     @empty @endforelse>
                                     {{ $item->name }}</option>
                             @endif

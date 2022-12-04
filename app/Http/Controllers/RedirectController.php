@@ -13,10 +13,18 @@ class RedirectController extends Controller
             if (Auth::User()->role == 0) {
                 return redirect()->route('admin.welcome');
             } else {
-                return view('front.home');
+                return view('front.home.index');
             }
         } else {
-            return view('front.home');
+            return view('front.home.index');
         }
+    }
+
+    public function website(){
+        return view('front.home.index');
+    }
+
+    public function adminWelcome(){
+        return view('admin.welcome');
     }
 }
