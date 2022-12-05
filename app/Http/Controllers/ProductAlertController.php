@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductAlert;
 use Auth;
 use Illuminate\Http\Request;
+use Session;
 
 class ProductAlertController extends Controller
 {
@@ -16,7 +17,8 @@ class ProductAlertController extends Controller
      */
     public function index()
     {
-        //
+        $alerts = ProductAlert::paginate(6, ['*'], 'alerts');
+        return view('admin.alerts.index', compact('alerts'));
     }
 
     /**
@@ -38,7 +40,7 @@ class ProductAlertController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'alert' => ['required','string','max:255']
+            'alert' => ['required', 'string', 'max:255']
         ]);
         $product = Product::findOrfail(strip_tags($request->productID));
         ProductAlert::create([
@@ -46,6 +48,8 @@ class ProductAlertController extends Controller
             'user_id' => Auth::User()->id,
             'product_id' => $product->id,
         ]);
+        Session::flash('msg', 'Alert for the product:"' . $product->name . '"');
+        return redirect()->back();
     }
 
     /**
@@ -54,9 +58,10 @@ class ProductAlertController extends Controller
      * @param  \App\Models\ProductAlert  $productAlert
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductAlert $productAlert)
+    public function show($id)
     {
-        //
+        $product = Product::findOrfail($id);
+        return view('admin.alerts.show', compact('product'));
     }
 
     /**
@@ -88,8 +93,11 @@ class ProductAlertController extends Controller
      * @param  \App\Models\ProductAlert  $productAlert
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductAlert $productAlert)
+    public function destroy($id)
     {
-        //
+        $alert = ProductAlert::findOrfail($id);
+        $alert->delete();
+        Session::flash('msg', 'Deleting the Alert Successfully.');
+        return redirect()->back();
     }
 }

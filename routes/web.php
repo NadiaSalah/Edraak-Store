@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductAlertController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SubCategoryController;
@@ -39,7 +40,7 @@ Route::prefix('home')->group(function () {
     Route::get('products.search', 'productsSearch')->name('ProductsFront.search');
     Route::get('products.filter', 'productsFilter')->name('ProductsFront.filter');
     Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('ProductsFront.index');
-    Route::get('policy','viewPolicy')->name('policy');
+    Route::get('policy', 'viewPolicy')->name('policy');
   });
 });
 
@@ -50,8 +51,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     'products' => ProductController::class,
     'orders' => OrderController::class,
   ]);
+  Route::resource('productAlerts', ProductAlertController::class)->only(['index', 'show', 'destroy']);
   Route::controller(MainCategoryController::class)->group(function () {
-    Route::get('mainCategories/archive', 'archive')->name('mainCategories.archive');
+    Route::get('mainCategories.archive', 'archive')->name('mainCategories.archive');
     Route::get('mainCategories.restoreAll', 'restoreAll')->name('mainCategories.restoreAll');
     Route::get('mainCategories/restore/{id}', 'restore')->name('mainCategories.restore');
     Route::get('mainCategories.forceDeleteAll', 'forceDeleteAll')->name('mainCategories.forceDeleteAll');
@@ -73,8 +75,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard/setting', 'dashboardSetting')->name('dashboard.setting');
     Route::get('products.search', 'productsSearch')->name('products.search');
     Route::get('products/archive', 'productsArchive')->name('products.archive');
-    Route::get('users/index', 'usersIndex')->name('users.index');
-    Route::get('users/archive', 'usersArchive')->name('users.archive');
+    Route::get('users.index', 'usersIndex')->name('users.index');
+    Route::get('users.blocked', 'usersBlocked')->name('users.blocked');
+    Route::get('users.actived', 'usersActived')->name('users.actived');
+    Route::get('users/active/{id}', 'userActive')->name('users.active');
+    Route::get('users/block/{id}', 'userBlock')->name('users.block');
+    Route::get('users.search', 'usersSearch')->name('users.search');
   });
 });
 
@@ -82,8 +88,8 @@ Route::prefix('user')->middleware(['auth', 'isUser'])->group(function () {
   Route::resources([
     'carts' => CartController::class,
     'addresses' => AddressController::class,
-    'productalerts' => ProductAlert::class,
   ]);
+  Route::resource('productAlerts', ProductAlertController::class)->only(['store']);
   Route::controller(FrontController::class)->group(function () {
     Route::get('profile', 'userProfile')->name('users.profile');
   });

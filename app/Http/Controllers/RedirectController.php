@@ -25,6 +25,6 @@ class RedirectController extends Controller
     }
 
     public function adminWelcome(){
-        return view('admin.welcome');
+        return view('admin.dashboard.welcome');
     }
 }

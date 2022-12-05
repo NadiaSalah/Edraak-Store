@@ -19,6 +19,10 @@ class isUser
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::User()->role == 1) {
+            if (Auth::User()->status == 0) {
+                Session::flash('error', 'You are Blocked by Admin, Please call us!');
+                return redirect()->route('home');
+            }
             return $next($request);
         } else {
             Session::flash('error', 'You are not User!');

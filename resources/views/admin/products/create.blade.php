@@ -3,7 +3,9 @@
 @section('page_title')
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="link-primary" href="{{ route('products.index') }}">Products</a></li>
+            <li class="breadcrumb-item">
+                <a class="link-primary" href="{{ route('products.index') }}">Products</a>
+            </li>
             <li class="breadcrumb-item " aria-current="page">Create</li>
         </ol>
     </nav>

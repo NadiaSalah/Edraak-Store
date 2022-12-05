@@ -24,6 +24,10 @@
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
                     <div class="text-end mb-2">
+                        <a  href="{{route('productAlerts.show', $product->id )}}" class="btn btn-warning">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Alerts
+                            <span class="badge text-bg-danger">{{ count($product->productAlerts) }}</span>
+                        </a>
                         <div class="btn-group" role="group">
                             <!-- Button trigger delet product modal -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -32,11 +36,12 @@
                             <!--END Button-->
                             <!-- Button Edit product -->
                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning"">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </a>
                             <!--END Button-->
                         </div>
                     </div>
-                    <footer class="blockquote-footer">Product : Delete,Edit</footer>
+                    <footer class="blockquote-footer mt-2">Product : Delete,Edit</footer>
                 </blockquote>
                 <!-- Delete product Modal -->
                 <div class="modal fade" id="delete_productX{{ $product->id }}" data-bs-backdrop="static"

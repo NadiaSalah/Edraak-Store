@@ -13,6 +13,7 @@
             @include('includes.message')
             @yield('page')
             @include('includes.front.footer')
+            @include('includes.front.copyright')
         </div>
         <!--End page -->
     </div>

@@ -15,8 +15,8 @@
                         </span>
                     </a>
                     <ul class="collapse px-5" id="dashboard">
+                        <li><a class="dropdown-item py-2" href="{{ route('admin.welcome') }}">Welcome</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('dashboard.reports') }}">Reports</a></li>
-                        <li><a class="dropdown-item py-2" href="{{ route('dashboard.setting') }}">Setting</a></li>
                     </ul>
                 </li>
                 <li class="mt-1">
@@ -67,7 +67,6 @@
                     </a>
                     <ul class="collapse px-5" id="users">
                         <li><a class="dropdown-item py-2" href="{{ route('users.index') }}">Mangement</a></li>
-                        <li><a class="dropdown-item py-2" href="{{ route('users.archive') }}">Archive</a></li>
                     </ul>
                 </li>
             </ul>

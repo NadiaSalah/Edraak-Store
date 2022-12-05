@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 <!--title-->
-@section('page_title', 'Products ')
+@section('page_title')
+<nav>
+    <ol class="breadcrumb">
+        @isset($title)
+        <li class="breadcrumb-item">
+            <a class="link-primary" href="{{ route('products.index') }}">Products</a>
+        </li>
+        <li class="breadcrumb-item">Search</li>
+        @else
+        <li class="breadcrumb-item">Products</li> 
+        @endisset
+    </ol>
+</nav>
+@endsection
 <!--End title-->
 <!--page-->
 @section('page')

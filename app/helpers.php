@@ -2,8 +2,10 @@
 
 use App\Models\MainCategory;
 use App\Models\Product;
+use App\Models\ProductAlert;
 use App\Models\Size;
 use App\Models\SubCategory;
+use App\Models\User;
 
 if (!function_exists('getMainCategories')) {
   function getMainCategories()
@@ -50,4 +52,34 @@ if (!function_exists('getSizes')) {
   {
     return Size::all();
   }
+
+  if (!function_exists('getUsers')) {
+    function getUsers()
+    {
+      return User::where('role', 1);
+    }
+  }
+
+  if (!function_exists('getBlockedUsers')) {
+    function getBlockedUsers()
+    {
+      return User::where('role', 1)->where('status',false);
+    }
+  }
+
+  if (!function_exists('getActivedUsers')) {
+    function getActivedUsers()
+    {
+      return User::where('role', 1)->where('status',true);
+    }
+  }
+
+
+  if (!function_exists('getAlerts')) {
+    function getAlerts()
+    {
+      return ProductAlert::paginate(3, ['*'], 'alerts');
+    }
+  }
+
 }

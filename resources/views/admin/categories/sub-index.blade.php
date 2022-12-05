@@ -9,10 +9,15 @@
             <li class="breadcrumb-item">
                 <a class="link-primary" href="{{ route('mainCategories.index') }}">
                     Main >> </a>
-            </li>
-            <li class="breadcrumb-item ">
-                Sub
-            </li>
+            </li> 
+                @isset($title)
+                <li class="breadcrumb-item">
+                    <a class="link-primary" href="{{ route('subCategories.index') }}">Sub >></a>
+                </li>
+                <li class="breadcrumb-item ">Search</li>
+                @else
+                <li class="breadcrumb-item ">Sub</li> 
+                @endisset  
         </ol>
     </nav>
 @endsection

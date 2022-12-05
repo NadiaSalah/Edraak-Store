@@ -4,12 +4,19 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Categories</li>
+            @isset($title)
+            <li class="breadcrumb-item">
+                <a class="link-primary" href="{{ route('mainCategories.index') }}">Main >></a>
+            </li>
+            <li class="breadcrumb-item ">Search</li>
+            @else
             <li class="breadcrumb-item">Main</li>
             <li class="breadcrumb-item ">
                 <a class=" link-primary" href="{{ route('subCategories.index') }}">
                     Sub >>
                 </a>
             </li>
+            @endisset  
         </ol>
     </nav>
 @endsection
