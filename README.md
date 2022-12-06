@@ -52,7 +52,7 @@ Put an X between the brackets for each feature that has been developed and teste
 ### Customer:
 - [x] The customer should be able to see a list of products on the website.
 - [x] The customer should be able to search for products by name.
-- [ ] The customer should be able to filter products.
+- [x] The customer should be able to filter products.
 - [x] The customer should be able to view a specific product’s details.
 - [x] The customer should be able to register an account on the website.
 - [x] The customer should be able to log into their account on the website.

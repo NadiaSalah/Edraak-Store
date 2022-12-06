@@ -1,6 +1,5 @@
 @extends('layouts.front')
 @section('page')
-    @include('includes.front.aside')  
         <div class="container my-5">
             <h2 class="  border-start border-3 border-primary ps-4">PRODUCTS INDEX</h2>
             <div class=" row mt-5">
@@ -14,7 +13,6 @@
                     {!! $products->links() !!}
                 </div>
                 <!--End Pagination-->
-
             </div>
         </div>
     @endsection

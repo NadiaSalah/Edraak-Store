@@ -7,7 +7,6 @@
                 style="min-height:400px; background: url({{ asset($product->image) }}) no-repeat scroll center ; background-size: cover;">
             </div>
         </div>
-        @if (Auth::User()->role == 1)
             <div class="card  mt-3">
                 <div class="card-header bg-primary text-light">
                     Actions
@@ -105,9 +104,6 @@
                     </blockquote>
                 </div>
             </div>
-        @else
-            <h2 class="text-bg-primary p-2 rounded">Welcome Admin</h2>
-        @endif
         <div class="card mt-3">
             <h5 class="card-header">Product Title and Details</h5>
             <div class="card-body">

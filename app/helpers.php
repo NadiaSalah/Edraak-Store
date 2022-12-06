@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MainCategory;
+use App\Models\MainSubCategory;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductAlert;
@@ -19,6 +20,13 @@ if (!function_exists('getsubCategories')) {
   function getsubCategories()
   {
     return SubCategory::all();
+  }
+}
+
+if (!function_exists('getMainSubCategories')) {
+  function getMainSubCategories()
+  {
+    return MainSubCategory::all();
   }
 }
 

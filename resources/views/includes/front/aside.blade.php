@@ -1,5 +1,5 @@
 <button class="btn btn-warning rounded-end position-fixed bottom-10 end-0 "  type="button" data-bs-toggle="offcanvas" data-bs-target="#frontAside">
-  <i class="fa-solid fa-bars"></i>
+    <i class="fa-solid fa-tags"></i>
 </button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="frontAside">
