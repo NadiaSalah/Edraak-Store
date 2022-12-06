@@ -11,10 +11,11 @@ class OrderDetail extends Model
    
     protected $fillable = [
         'order_id',
-        'product_id',
+        'product_size_id',
         'quantity',
         'price',
-        'total_price'
+        'total_price',
+        'status',
         
     ];
 
@@ -22,7 +23,7 @@ class OrderDetail extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function productSizeItem(){
+    public function productSize(){
         return $this->belongsTo(ProductSizeItem::class);
     }
 }

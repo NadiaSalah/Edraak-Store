@@ -13,17 +13,26 @@
             <h5 class="card-title text-primary">{{ substr($p_item->name, 0, 30) . '....' }}</h5>
             <p class="text-end m-0 p-0">
                 @if ($p_item->discount == 0)
-                    <span class="bg-info p-2 text-dark bg-opacity-25 rounded me-2">
+                    <span class="bg-info p-2 text-dark bg-opacity-25 rounded me-2 d-inline-block my-2">
                         <i class="fa-solid fa-dollar-sign"></i>{{ $p_item->price }}
                     </span>
                 @else
-                    <span class="bg-primary p-2 text-dark bg-opacity-25 rounded border border-info me-2">
+                    <span class="bg-primary p-2 text-dark bg-opacity-25 rounded border border-info me-2 d-inline-block my-2">
                         <i class="fa-solid fa-dollar-sign"></i>
                         <span class="text-decoration-line-through text-danger">{{ $p_item->price }}</span>
                         <span>{{ $p_item->price * (1 - $p_item->discount / 100) }}</span>
                         <span class="text-success"></span>
                     </span>
                 @endif
+                    @if ($p_item->quantity == 0)
+                        <span class="bg-danger p-2 text-danger bg-opacity-25 rounded d-inline-block my-2">
+                            <i class="fa-solid fa-circle-xmark"></i> Out of stock
+                        </span>
+                    @else
+                        <span class="bg-success p-2 text-success bg-opacity-25 rounded d-inline-block my-2">
+                            <i class="fa-solid fa-cubes"></i> In stock: #{{ $p_item->quantity }}
+                        </span>
+                    @endif
                 <!-- Button show product -->
                 <a href="{{ route('productsFront.show', $p_item->id) }}" class="btn btn-warning stretched-link">
                     <i class="fa-sharp fa-solid fa-eye"></i></a>
@@ -39,7 +48,8 @@
                         <div class="input-group mb-3">
                             <input name="productID" value="{{ $p_item->id }}" hidden required>
                             <input name="quantity" type="number" min="1" step="1" max={{ $p_item->quantity }}
-                                class="form-control" placeholder="Product Numbers" value="{{ $c_item->quantity }}">
+                                class="form-control" placeholder="Product Numbers" value="{{ $c_item->quantity }}"
+                                required>
                             <button class="btn btn-outline-primary" type="submit">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 Update cart
@@ -92,11 +102,11 @@
             @endif
         </div>
         @isset($size)
-            <div class=" container mb-3 rounded-bottom text-light">
-                <span class=" p-2 bg-primary d-inline-block my-2 rounded"># {{ $c_item->quantity }}</span>
-                <span class=" p-2 bg-success d-inline-block my-2 rounded">
+            <div class=" container mb-3 rounded-bottom">
+                <span class=" p-2 text-bg-warning d-inline-block my-2 rounded">id#{{ $c_item->id }}</span>
+                <span class=" p-2 text-bg-primary d-inline-block my-2 rounded"># {{ $c_item->quantity }}</span>
+                <span class=" p-2 text-bg-success d-inline-block my-2 rounded">
                     $ {{ $c_item->quantity * $p_item->price * (1 - $p_item->discount / 100) }}</span>
-
                 <div class="text-end">
                     <!-- Button trigger Delete cart modal-->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"

@@ -1,7 +1,7 @@
 <div
     style="height: 250px; background: url({{ asset('assets/images/front/sale.jpg') }}) no-repeat fixed center ; background-size: cover;">
     <div class="d-flex  bg-dark bg-opacity-75 h-100 align-items-center ps-5">
-        <span class="text-light border-start border-3 border-info ps-3 fs-1"> Sales</span>
+        <span class="text-light border-start border-3 border-info ps-3 fs-1"> SALES</span>
     </div>
 </div>
 <div class="container my-5">

@@ -14,18 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('main_sub_categories', function (Blueprint $table) {
-            $table->id();                    
+            $table->id();
             $table->foreignId('main_category_id')
-                  ->constrained('main_categories')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate(); 
+                ->constrained('main_categories')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('sub_category_id')
-                  ->constrained('sub_categories')
-                   ->cascadeOnDelete()
-                   ->cascadeOnUpdate(); 
-
-            // $table->integer('main_category_id');
-            // $table->integer('sub_category_id');
+                ->constrained('sub_categories')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

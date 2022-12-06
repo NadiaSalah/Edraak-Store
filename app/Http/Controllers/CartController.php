@@ -30,7 +30,26 @@ class CartController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $total_quantity = 0;
+        $final_price = 0;
+        foreach ($carts = $user->carts as $c_item) {
+            $product = $c_item->productSize->product;
+            if ($product->quantity == 0) {
+                return redirect()->back()
+                    ->with('error', 'Please delete the product with cart id#"' . $c_item . '" from your cart dut to it is Out of stock ');
+            }
+            if ($product->quantity < $c_item->quantity) {
+                return redirect()->back()
+                    ->with('error', 'Please update the product  with cart id#"' . $c_item . '" quantity or delete');
+            }
+            $quantity = $c_item->quantity;
+            $total_quantity += $quantity;
+            $price = $product->price * (1 - $product->discount / 100);
+            $final_price += $price * $quantity;
+        }
+        $invoice = array('quantity' => $total_quantity, 'price' => $final_price);
+        return view('front.carts.create', compact('user', 'invoice'));
     }
 
     /**

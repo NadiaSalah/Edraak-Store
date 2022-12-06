@@ -52,16 +52,16 @@ Put an X between the brackets for each feature that has been developed and teste
 ### Customer:
 - [x] The customer should be able to see a list of products on the website.
 - [x] The customer should be able to search for products by name.
-- [x] The customer should be able to filter products.
+- [ ] The customer should be able to filter products.
 - [x] The customer should be able to view a specific product’s details.
 - [x] The customer should be able to register an account on the website.
 - [x] The customer should be able to log into their account on the website.
 - [x] The logged-in customer should be able to add a product to their shopping cart.
 - [x] The logged-in customer should be able to view the products added to their cart.
 - [x] The logged-in customer should be able to remove a product that was added to their shopping cart.
-- [ ] The logged-in customer should be able to complete their order by entering their shipping information and confirming their order.
-- [ ] The logged-in customer should be able to view a list of their orders and their statuses.
-- [ ] The logged-in customer should be able to view the details of their orders.
+- [X] The logged-in customer should be able to complete their order by entering their shipping information and confirming their order.
+- [X] The logged-in customer should be able to view a list of their orders and their statuses.
+- [X] The logged-in customer should be able to view the details of their orders.
 - [x] The logged-in customer should be able to log out of the website.
 
 ## Database Schema

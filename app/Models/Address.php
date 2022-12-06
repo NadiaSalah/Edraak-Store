@@ -21,7 +21,6 @@ class Address extends Model
         'country',
         'postal_code',
         'user_id',
-    
     ];
 
     public function user()
@@ -29,8 +28,9 @@ class Address extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orders(){
-     return $this->hasMany(Order::class);
-    }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

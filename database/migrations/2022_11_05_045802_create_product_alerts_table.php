@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('product_alerts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')
-                  ->constrained('products')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();
+                ->constrained('products')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();
-            $table->string('alert') ;  
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->string('alert');
             $table->timestamps();
         });
     }

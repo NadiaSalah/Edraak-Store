@@ -6,10 +6,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductAlertController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\OrderDetail;
 use App\Models\ProductAlert;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
@@ -88,6 +90,7 @@ Route::prefix('user')->middleware(['auth', 'isUser'])->group(function () {
   Route::resources([
     'carts' => CartController::class,
     'addresses' => AddressController::class,
+    'orderDetails'=>OrderDetailController::class,
   ]);
   Route::resource('productAlerts', ProductAlertController::class)->only(['store']);
   Route::controller(FrontController::class)->group(function () {

@@ -24,7 +24,7 @@ class ProductController extends Controller
     use CallFunTrait;
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::orderBy('id', 'desc')->paginate(15);
         return view('admin.products.index', compact('products'));
     }
 

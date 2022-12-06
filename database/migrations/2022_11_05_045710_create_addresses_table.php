@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('country');
             $table->string('postal_code');
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,7 +14,6 @@ class Order extends Model
         'address_id',
         'total_quantity',
         'final_price',
-        'status',
         'payment'
     ];
 

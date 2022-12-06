@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MainCategory;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductAlert;
 use App\Models\Size;
@@ -25,7 +26,7 @@ if (!function_exists('getsubCategories')) {
 if (!function_exists('getProducts')) {
   function getProducts()
   {
-    return Product::paginate(6, ['*'], 'product');
+    return Product::orderBy('id', 'desc')->paginate(6, ['*'], 'product');
   }
 }
 
@@ -34,6 +35,7 @@ if (!function_exists('getHotProducts')) {
   {
     return Product::where('view', 'hot')
       ->where('quantity', '!=', 0)
+      ->orderBy('id', 'desc')
       ->paginate(3, ['*'], 'hot');
   }
 }
@@ -43,6 +45,7 @@ if (!function_exists('getSaleProducts')) {
   {
     return Product::where('discount', '!=', 0)
       ->where('quantity', '!=', 0)
+      ->orderBy('id', 'desc')
       ->paginate(3, ['*'], 'sale');
   }
 }
@@ -63,14 +66,14 @@ if (!function_exists('getSizes')) {
   if (!function_exists('getBlockedUsers')) {
     function getBlockedUsers()
     {
-      return User::where('role', 1)->where('status',false);
+      return User::where('role', 1)->where('status', false);
     }
   }
 
   if (!function_exists('getActivedUsers')) {
     function getActivedUsers()
     {
-      return User::where('role', 1)->where('status',true);
+      return User::where('role', 1)->where('status', true);
     }
   }
 
@@ -78,8 +81,22 @@ if (!function_exists('getSizes')) {
   if (!function_exists('getAlerts')) {
     function getAlerts()
     {
-      return ProductAlert::paginate(3, ['*'], 'alerts');
+      return ProductAlert::orderBy('id', 'desc')->paginate(3, ['*'], 'alerts');
     }
   }
 
+  if (!function_exists('getOrderStatus')) {
+    function getOrderStatus($id)
+    {
+      $order = Order::findOrFail($id);
+      $status = array(
+        'processing' => $order->orderdetails->where('status', 'processing')->count(),
+        'shipped' => $order->orderdetails->where('status', 'shipped')->count(),
+        'delivered' => $order->orderdetails->where('status', 'delivered')->count(),
+        'complete' => $order->orderdetails->where('status', 'complete')->count(),
+        'canceled' => $order->orderdetails->where('status', 'canceled')->count(),
+      );
+      return $status;
+    }
+  }
 }

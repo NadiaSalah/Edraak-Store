@@ -15,19 +15,18 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->cascadeOnDelete()
-                  ->cascadeOnUpdate();
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('address_id')
                 ->constrained('addresses')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->integer('total_quantity');
-            $table->decimal('final_price',8,2);
-            $table->string('status')->default('processing'); // processing, shipped, delivered, complete, canceled
+            $table->decimal('final_price', 8, 2);
             $table->integer('payment')->default(0); // 0 :cash , 1: online
+            $table->timestamps();
         });
     }
 

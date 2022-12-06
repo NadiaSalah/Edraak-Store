@@ -43,7 +43,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Orders</a></li>
+                                <li><a class="dropdown-item" href="{{route('orderDetails.index')}}">Orders</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

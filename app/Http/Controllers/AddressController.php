@@ -42,7 +42,7 @@ class AddressController extends Controller
         ]);
 
         Session::flash('msg', 'Address is added Successfully');
-        return redirect()->route('addresses.index');
+        return redirect()->back();
     }
 
 

@@ -39,7 +39,7 @@
                     <ul class="list-inline">
                         @forelse (getMainCategories() as $m_item)
                             @if (count($m_item->products) != 0)
-                                @forelse(getSubCategories() as $s_item)
+                                @forelse($m_item->subCategories as $s_item)
                                     <li class="list-inline-item rounded-pill fs-6 px-2 py-1 m-1"
                                         style="background-color:#E14C2B;">
                                         <a href="{{ route('ProductsFront.index', ['m_id' => $m_item->id, 's_id' => $s_item->id]) }}"

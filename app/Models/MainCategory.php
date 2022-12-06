@@ -24,7 +24,7 @@ class MainCategory extends Model
     }
     public function mainSubCategories()
     {
-        return $this->hasMany(MainSubCategory::class);
+        return $this->hasMany(MainSubCategory::class)->where('deleted_at',null);
     }
 
     public function products()

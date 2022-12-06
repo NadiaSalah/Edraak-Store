@@ -34,7 +34,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'image' => $path . ($i + 1) . '.jpg',
                 'quantity' => rand(0, 100),
                 'price' => rand(50, 1000),
-                'discount' => rand(0, 99),
+                'discount' => rand(0, 45),
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
                 'main_sub_category_id' =>rand(1, 18),

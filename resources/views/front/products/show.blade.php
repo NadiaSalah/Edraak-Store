@@ -35,7 +35,7 @@
                                             <input name="productID" value="{{ $product->id }}" hidden required>
                                             <input name="quantity" type="number" min="1" step="1"
                                                 max={{ $product->quantity }} class="form-control"
-                                                placeholder="Product Numbers">
+                                                placeholder="Product Numbers" required>
                                             <button class="btn btn-outline-primary" type="submit"><i
                                                     class="fa-solid fa-cart-plus"></i> Add to cart</button>
                                         </div>
