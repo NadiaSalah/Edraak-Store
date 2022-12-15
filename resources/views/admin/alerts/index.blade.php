@@ -29,8 +29,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#products_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#products_link').addClass('activeLink');
         });
     </script>
 @endsection

@@ -7,13 +7,7 @@
                 <li class="breadcrumb-item">
                     <a class="link-primary" href="{{ route('users.index') }}">Users</a>
                 </li>
-                @if ($title == 'Blocked')
-                    <li class="breadcrumb-item">Blocked</li>
-                @elseif($title == 'Actived')
-                    <li class="breadcrumb-item">Actived</li>
-                @elseif($title == 'Search')
-                    <li class="breadcrumb-item">Search</li>
-                @endif
+                <li class="breadcrumb-item">{{ $title }}</li>
             @else
                 <li class="breadcrumb-item">Users</li>
             @endisset
@@ -45,30 +39,37 @@
                                     <p> <strong class="text-primary">Email: </strong> {{ $u_item->email }}</p>
                                 </div>
                                 <div class="col p-2">
-                                    <p> <strong class="text-primary">Orders: #</strong> {{ $u_item->orders->count() }}</p>
+                                    <p> <strong class="text-primary">Orders Items: #</strong> {{ $u_item->orderDetails->count() }}
+                                        @if($u_item->orderDetails->count() !=0)
+                                        <a href="{{ route('orders.show', $u_item->id) }}"
+                                            class="btn btn-sm btn-warning ms-2">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        @endif
+                                    </p>
                                     <p> <strong class="text-primary">Alerts: #</strong>
                                         {{ $u_item->productAlerts->count() }}</p>
-                                    @if ($u_item->status)
-                                        <p class="text-success"> <strong class="text-primary">Status: </strong>Active</p>
-                                        <div class="text-end my-2">
-                                            <!-- Button trigger Block user modal-->
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#block_userX{{ $u_item->id }}">
-                                                <i class="fa-solid fa-ban"></i> Block</button>
-                                            <!--END Button-->
-                                        </div>
-                                    @else
-                                        <p class="text-success"> <strong class="text-primary">Status: </strong>Block</p>
-                                        <div class="text-end my-2">
-                                            <!-- Button trigger active user modal -->
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#active_userX{{ $u_item->id }}">
-                                                <i class="fa-solid fa-circle-check"></i></i> Active
-                                            </button>
-                                            <!-- End Button-->
-                                        </div>
-                                    @endif
                                 </div>
+                            </div>
+                            <div class="contianer text-end my-2">
+                                @if ($u_item->status)
+                                    <span class="text-success mx-2"> <strong class="text-primary">Status:
+                                        </strong>Active</span>
+                                    <!-- Button trigger Block user modal-->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#block_userX{{ $u_item->id }}">
+                                        <i class="fa-solid fa-ban"></i> Block</button>
+                                    <!--END Button-->
+                                @else
+                                    <span class="text-danger  mx-2"> <strong class="text-primary">Status:
+                                        </strong>Block</span>
+                                    <!-- Button trigger active user modal -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#active_userX{{ $u_item->id }}">
+                                        <i class="fa-solid fa-circle-check"></i></i> Active
+                                    </button>
+                                    <!-- End Button-->
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -133,8 +134,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#users_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#users_link').addClass('activeLink');
         });
     </script>
 @endsection

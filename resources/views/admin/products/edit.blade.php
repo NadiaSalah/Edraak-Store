@@ -146,8 +146,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#products_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#products_link').addClass('activeLink');
             $('.main').click(function(e) {
                 e.preventDefault();
                 $('.sub').prop('checked', false);
@@ -163,8 +163,7 @@
                     }
                     reader.readAsDataURL(file);
                 }
-            });
-           
+            });           
         });
 
 

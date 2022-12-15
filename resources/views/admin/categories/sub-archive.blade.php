@@ -84,7 +84,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="alert alert-warning" role="alert">
-                                        warning! Are you sure to restoreing all sub categories from archive
+                                        warning! Are you sure to restoreing all subcategories from archive
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -103,7 +103,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="alert alert-danger" role="alert">
-                                        Danger! Are you sure to force deleteing all sub categories from archive
+                                        Danger! Are you sure to force deleteing all subcategories from archive
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -175,7 +175,7 @@
                 </div>
                 <!-- END mainCategories-->
             @empty
-                <p>sorry, there are not sub categories in the archive</p>
+                <p>sorry, there are not subcategories in the archive</p>
             @endforelse
         </div>
     </div>
@@ -190,8 +190,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#categories_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#categories_link').addClass('activeLink');
         });
     </script>
 @endsection

@@ -190,7 +190,7 @@
                         data-bs-parent="#accordionExampleX{{ $main_item->id }}">
                         <div class="accordion-body">
                             <div class="container">
-                                <h5><span class="badge bg-info text-dark"> Sub Categories:</span> </h5>
+                                <h5><span class="badge bg-info text-dark"> Subcategories:</span> </h5>
                                 <div class="row ">
                                     @forelse ($main_item->subCategories as $sub_item)
                                         <div class="col-auto m-2">
@@ -299,7 +299,7 @@
                                         </div>
                                         <!-- END Model -->
                                     @empty
-                                        <p>sorry, there are not Sub Categories</p>
+                                        <p>sorry, there are not Subcategories</p>
                                     @endforelse
                                 </div>
                             </div>
@@ -324,8 +324,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#categories_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#categories_link').addClass('activeLink');
         });
     </script>
 @endsection

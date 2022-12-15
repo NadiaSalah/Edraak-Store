@@ -97,10 +97,14 @@
                 <i class="fa-solid fa-filter"></i>
             </button>
             <!-- End Button trigger-->
-            <!-- Modal -->
+            <button class="btn btn-warning m-1"  type="button" data-bs-toggle="offcanvas" data-bs-target="#frontAside">
+                <i class="fa-solid fa-tags"></i>
+            </button>
+            
         </div>
     </div>
 </nav>
+<!-- filter Modal -->
 <div class="modal fade" id="productsfilter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -173,3 +177,9 @@
         </div>
     </div>
 </div>
+<!-- End Modal -->
+<!-- Aside -->
+@include('includes.front.aside')
+<!-- End Aside -->
+
+

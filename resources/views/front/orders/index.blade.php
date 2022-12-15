@@ -3,6 +3,53 @@
     @include('includes.front.user_header')
     <div class="container my-5">
         <h2 class="  border-start border-3 border-primary ps-4 my-5">ORDERS</h2>
+        <ul class="nav nav-tabs mb-5 bg-light p-3">
+            @php
+                $class = '';
+                $p_class = '';
+                $s_class = '';
+                $d_class = '';
+                $cm_class = '';
+                $cn_class = '';
+            @endphp
+            @isset($title)
+                @php
+                    if ($title == 'processing') {
+                        $p_class = 'active';
+                    } elseif ($title == 'shipped') {
+                        $s_class = 'active';
+                    } elseif ($title == 'delivered') {
+                        $d_class = 'active';
+                    } elseif ($title == 'complete') {
+                        $cm_class = 'active';
+                    } elseif ($title == 'canceled') {
+                        $cn_class = 'active';
+                    }
+                @endphp
+            @else
+                @php
+                    $class = 'active';
+                @endphp
+            @endisset
+            <li class="nav-item">
+                <a class="nav-link {{ $class }}" href="#">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $p_class }}" href="{{ route('orderDetails.edit', 'processing') }}">Processing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $s_class }}" href="{{ route('orderDetails.edit', 'shipped') }}">Shipped</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $d_class }}" href="{{ route('orderDetails.edit', 'delivered') }}">Delivered</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $cm_class }}" href="{{ route('orderDetails.edit', 'complete') }}">Complete</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $cn_class }}" href="{{ route('orderDetails.edit', 'canceled') }}">Canceled</a>
+            </li>
+        </ul>
         @forelse ($orders as $o_item)
             <div class="card border-primary my-2">
                 <div class="card-header bg-primary bg-opacity-50 border-primary fs-5">
@@ -45,23 +92,7 @@
                                 </span>
                             </div>
                             @forelse (getOrderStatus($o_item->id) as $st_key=>$st_value)
-                                @if ($st_key == 'processing')
-                                    @php
-                                        $class = 'info';
-                                    @endphp
-                                @elseif($st_key == 'complete' || $st_key == 'delivered')
-                                    @php
-                                        $class = 'success';
-                                    @endphp
-                                @elseif($st_key == 'shipped')
-                                    @php
-                                        $class = 'warning';
-                                    @endphp
-                                @elseif($st_key == 'canceled')
-                                    @php
-                                        $class = 'danger';
-                                    @endphp
-                                @endif
+                                @php $class=orderStatusCalss($st_key); @endphp
                                 <div class="col-auto rounded-pill">
                                     <span class=" rounded-start text-bg-{{ $class }} p-1">
                                         {{ $st_key }}

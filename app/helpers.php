@@ -3,6 +3,7 @@
 use App\Models\MainCategory;
 use App\Models\MainSubCategory;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductAlert;
 use App\Models\Size;
@@ -92,18 +93,69 @@ if (!function_exists('getSizes')) {
       return ProductAlert::orderBy('id', 'desc')->paginate(3, ['*'], 'alerts');
     }
   }
+  if (!function_exists('getOrderDetails')) {
+    function getOrderDetails()
+    {
+      return OrderDetail::all();
+    }
+  }
+
+  if (!function_exists('orderAction')) {
+    function orderAction($status)
+    {
+      if ($status == 'processing') {
+        $action = 'shipped';
+      } elseif ($status == 'shipped') {
+        $action = 'delivered';
+      } elseif ($status == 'delivered') {
+        $action = 'complete';
+      } else {
+        $action = null;
+      }
+      return  $action;
+    }
+  }
+
+  if (!function_exists('allOrderStatus')) {
+    function allOrderStatus()
+    {
+      return array('processing', 'shipped', 'delivered', 'complete', 'canceled');
+    }
+  }
+
+  if (!function_exists('orderStatusCalss')) {
+    function orderStatusCalss($status)
+    {
+      if ($status == 'processing') {
+        $class = 'info';
+      } elseif ($status == 'shipped') {
+        $class = 'warning';
+      } elseif ($status == 'delivered') {
+        $class = 'primary';
+      } elseif ($status == 'complete') {
+        $class = 'success';
+      } elseif ($status == 'canceled') {
+        $class = 'danger';
+      } else {
+        $class = null;
+      }
+      return  $class;
+    }
+  }
 
   if (!function_exists('getOrderStatus')) {
     function getOrderStatus($id)
     {
-      $order = Order::findOrFail($id);
-      $status = array(
-        'processing' => $order->orderdetails->where('status', 'processing')->count(),
-        'shipped' => $order->orderdetails->where('status', 'shipped')->count(),
-        'delivered' => $order->orderdetails->where('status', 'delivered')->count(),
-        'complete' => $order->orderdetails->where('status', 'complete')->count(),
-        'canceled' => $order->orderdetails->where('status', 'canceled')->count(),
-      );
+      if (is_numeric($id)) {
+        $order = Order::findOrFail($id);
+        $orderdetails = $order->orderdetails;
+      } else {
+        $orderdetails = OrderDetail::all();
+      }
+      $status=array();
+      foreach(allOrderStatus() as $s_item){
+        $status[$s_item]=$orderdetails->where('status',$s_item)->count();
+      }
       return $status;
     }
   }

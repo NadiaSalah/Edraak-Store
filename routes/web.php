@@ -76,13 +76,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard/reports', 'dashboardReports')->name('dashboard.reports');
     Route::get('dashboard/setting', 'dashboardSetting')->name('dashboard.setting');
     Route::get('products.search', 'productsSearch')->name('products.search');
+    Route::get('orders.search', 'ordersSearch')->name('orders.search');
     Route::get('products/archive', 'productsArchive')->name('products.archive');
     Route::get('users.index', 'usersIndex')->name('users.index');
     Route::get('users.blocked', 'usersBlocked')->name('users.blocked');
     Route::get('users.actived', 'usersActived')->name('users.actived');
     Route::get('users/active/{id}', 'userActive')->name('users.active');
     Route::get('users/block/{id}', 'userBlock')->name('users.block');
-    Route::get('users.search', 'usersSearch')->name('users.search');
+    Route::get('users.search', 'usersSearch')->name('users.search');    
   });
 });
 

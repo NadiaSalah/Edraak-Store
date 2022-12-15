@@ -190,7 +190,7 @@
                                                 {{ $sub_item->name }} </div>
                                         </div>
                                     @empty
-                                        <p>sorry, there are not Sub Categories</p>
+                                        <p>sorry, there are not Subcategories</p>
                                     @endforelse
                                 </div>
                             </div>
@@ -215,8 +215,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#categories_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#categories_link').addClass('activeLink');
         });
     </script>
 @endsection

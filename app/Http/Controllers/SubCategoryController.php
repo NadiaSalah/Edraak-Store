@@ -207,21 +207,21 @@ class SubCategoryController extends Controller
     public function archiveAll()
     {
         SubCategory::where('id', '!=', null)->Delete();
-        Session::flash('msg', 'Archived all Sub Categories successfully');
+        Session::flash('msg', 'Archived all Subcategories successfully');
         return redirect()->back();
     }
 
     public function forceDeleteAll()
     {
         SubCategory::onlyTrashed()->forceDelete();
-        Session::flash('msg', 'Force delete all archived Sub Categories successfully');
+        Session::flash('msg', 'Force delete all archived Subcategories successfully');
         return redirect()->back();
     }
 
     public function restoreAll()
     {
         SubCategory::onlyTrashed()->restore();
-        Session::flash('msg', 'Restore all archived Sub Categories successfully');
+        Session::flash('msg', 'Restore all archived Subcategories successfully');
         return redirect()->back();
     }
 }

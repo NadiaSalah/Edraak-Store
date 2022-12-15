@@ -19,7 +19,7 @@ class OrderDetailController extends Controller
     public function index()
     {
         $orders = Order::where('user_id', Auth::User()->id)
-        ->orderBy('id', 'desc')->paginate(6);
+            ->orderBy('id', 'desc')->paginate(6);
         return view('front.orders.index', compact('orders'));
     }
 
@@ -103,9 +103,11 @@ class OrderDetailController extends Controller
      * @param  \App\Models\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderDetail $orderDetail)
+    public function edit($status)
     {
-        //
+        $title = $status;
+        $orderDetails = OrderDetail::where('status', $status)->paginate(6);
+        return view('front.orders.edit', compact('orderDetails', 'title'));
     }
 
     /**

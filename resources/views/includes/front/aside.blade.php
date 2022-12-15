@@ -1,6 +1,3 @@
-<button class="btn btn-warning rounded-end position-fixed bottom-10 end-0 "  type="button" data-bs-toggle="offcanvas" data-bs-target="#frontAside">
-    <i class="fa-solid fa-tags"></i>
-</button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="frontAside">
     <div class="offcanvas-header">
@@ -15,7 +12,7 @@
                     <li class="list-group-item"><a href="{{ route('ProductsFront.index',['m_id'=>$m_item->id,'s_id'=>$s_item->id]) }}" style="text-decoration: none;">{{ $s_item->name }}</a>
                     </li>
                 @empty
-                <li>sorry, there are not Sub categories</li>
+                <li>sorry, there are not Subcategories</li>
                 @endforelse
             </ul>
         @empty

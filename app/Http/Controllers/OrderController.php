@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +18,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orderDetails = OrderDetail::orderBy('id', 'DESC')->paginate(6);
+        return view('admin.orders.index', compact('orderDetails'));
     }
 
     /**
@@ -44,9 +49,18 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($status)
     {
-        //
+        if (is_numeric($status)) {
+            $orderDetails = User::findOrFail($status)->orderDetails()
+                ->orderBy('id', 'DESC')->paginate(6);
+            $title ='For user id#' . $status;
+        } else {
+            $title = $status;
+            $orderDetails = OrderDetail::where('status', $status)
+                ->orderBy('id', 'DESC')->paginate(6);
+        }
+        return view('admin.orders.index', compact('orderDetails', 'title'));
     }
 
     /**
@@ -55,9 +69,10 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $orderDetails = OrderDetail::findOrFail($id);
+        return view('admin.orders.show', compact('orderDetails'));
     }
 
     /**
@@ -67,9 +82,21 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(['status' => ['required']]);
+        $status = strip_tags($request->status);
+        $orderDetails = OrderDetail::findOrFail($id);
+        $orderDetails->update([
+            'status' => $status
+        ]);
+        if ($status == 'canceled') {
+            $product = $orderDetails->productSize->product;
+            $product->quantity +=  $orderDetails->quantity;
+            $product->update();
+        }
+        return redirect()->back()
+            ->with('msg', 'Successfuly change order status');
     }
 
     /**

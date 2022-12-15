@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="link-primary" href="{{ route('products.index') }}">Products</a></li>
-            <li class="breadcrumb-item " aria-current="page">Show</li>
+            <li class="breadcrumb-item ">Show</li>
         </ol>
     </nav>
 @endsection
@@ -24,7 +24,7 @@
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
                     <div class="text-end mb-2">
-                        <a  href="{{route('productAlerts.show', $product->id )}}" class="btn btn-warning">
+                        <a href="{{ route('productAlerts.show', $product->id) }}" class="btn btn-warning">
                             <i class="fa-solid fa-triangle-exclamation"></i> Alerts
                             <span class="badge text-bg-danger">{{ count($product->productAlerts) }}</span>
                         </a>
@@ -66,12 +66,21 @@
                 </div>
             </div>
         </div>
-
         <div class="card mt-3">
             <h5 class="card-header">Product Title and Details</h5>
             <div class="card-body">
                 <h4 class="card-title text-primary"><span class="bg-info me-2 p-1 text-primary bg-opacity-25 rounded">
                         ID:{{ $product->id }}</span><span>{{ $product->name }}</span></h4>
+                <h6 class=" mt-3 d-inline-block">
+                    <span class="text-bg-dark p-2 rounded">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                        @if ($product->created_at)
+                            {{ $product->created_at }}
+                        @else
+                            Unkown
+                        @endif
+                    </span>
+                </h6>
                 <p class="card-text">
                 <ul class="list-group list-group-flush  w-100">
                     <li class="list-group-item">
@@ -154,7 +163,7 @@
                 <p class="card-text">{{ $product->description }}</p>
             </div>
         </div>
-        
+
     </div>
 @endsection
 <!--ENDpage-->
@@ -162,8 +171,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#products_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#products_link').addClass('activeLink');
         });
     </script>
 @endsection

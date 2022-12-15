@@ -113,6 +113,16 @@
                     <span>{{ $product->name }}</span>
                 </h4>
                 <h6 class=" mt-3 d-inline-block">
+                    <span class="text-bg-dark p-2 rounded">
+                        <i class="fa-solid fa-calendar-plus"></i> 
+                        @if($product->created_at)
+                        {{ $product->created_at  }}
+                        @else
+                        Unkown 
+                        @endif
+                    </span>
+                </h6>
+                <h6 class=" mt-3 d-inline-block">
                     @if ($product->discount == 0)
                         <span class="bg-primary p-2 text-dark bg-opacity-25 rounded">
                             <i class="fa-solid fa-dollar-sign"></i>{{ $product->price }}
@@ -126,7 +136,7 @@
                                 %</span>
                         </span>
                     @endif
-                </h6>
+                </h6>                
                 <p class="card-text">
                 <ul class="list-group list-group-flush w-100">
                     <li class="list-group-item">

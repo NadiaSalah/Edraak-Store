@@ -3,17 +3,20 @@
     <!--Session-->
     @if (Session::has('msg'))
         <div class="alert alert-info alert-dismissible fade show m-3" role="alert">
-            <span>{{Session::get('msg')}}</span>
+            <span>{{ Session::get('msg') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
-            <span>{{Session::get('error')}}</span>
+            <span>{{ Session::get('error') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @php
+        session()->forget(['msg', 'error']);
+    @endphp
 
     <!--Validation-->
     @if ($errors->any())

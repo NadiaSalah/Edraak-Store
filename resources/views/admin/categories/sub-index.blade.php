@@ -134,7 +134,7 @@
                 </div>
                 <!-- END subCategories-->
             @empty
-                <p>sorry, there are not sub categories</p>
+                <p>sorry, there are not subcategories</p>
             @endforelse
         </div>
     </div>
@@ -149,8 +149,8 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('a.link').removeClass('active');
-            $('#categories_link').addClass('active');
+            $('a.link').removeClass('activeLink');
+            $('#categories_link').addClass('activeLink');
         });
     </script>
 @endsection

@@ -43,9 +43,9 @@ Put an X between the brackets for each feature that has been developed and teste
 - [x] The admin should be able to log into the website.
 - [x] The logged-in admin should be able to create, list, update, and delete different product categories and subcategories.
 - [x] The logged-in admin should be able to create, list, update, and delete different products.
-- [ ] The logged-in admin should be able to see a list of customer orders.
-- [ ] The logged-in admin should be able to view the details of customer orders.
-- [ ] The logged-in admin should be able to update any order’s status.
+- [x] The logged-in admin should be able to see a list of customer orders.
+- [x] The logged-in admin should be able to view the details of customer orders.
+- [x] The logged-in admin should be able to update any order’s status.
 - [x] The logged-in admin should be able to log out of the website.
 
 

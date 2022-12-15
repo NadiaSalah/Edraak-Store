@@ -2,7 +2,6 @@
 @section('page')
     @include('includes.front.slider')
     <div class="">
-        @include('includes.front.aside')
         @include('includes.front.products-sec')
         @include('includes.front.hot-sec')
         @include('includes.front.sale-sec')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MainSubCategory;
 use App\Models\MainCategory;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -76,7 +77,7 @@ class AdminController extends Controller
         $title = 'Search';
         Session::flash('msg', ' successfull Searching for Product with id#' . $search);
         return view('admin.products.index', compact('products', 'title'));
-      }else{
+      } else {
         Session::flash('error', 'Sorry , No searching result for id#' . $search);
         return redirect()->back();
       }
@@ -124,7 +125,25 @@ class AdminController extends Controller
   {
     return view('admin.dashboard.reports');
   }
-
+  // -----orders----------
+  public function ordersSearch(Request $request)
+  {
+    $search = strip_tags($request->input('search'));
+    if (is_numeric($search)) {
+      $orderDetails = OrderDetail::where('id', $search)->paginate(1);
+      if ($orderDetails->total() > 0) {
+        $title = 'Search';
+        Session::flash('msg', ' successfull Searching for Order Item with id#' . $search);
+        return view('admin.orders.index', compact('orderDetails', 'title'));
+      } else {
+        Session::flash('error', 'Sorry , No searching result for id#' . $search);
+        return redirect()->back();
+      }
+    } else {
+      Session::flash('error', 'the searching word "' . $search . '" is a String, id is a number "');
+      return redirect()->back();
+    }
+  }
   // -----users----------
   public function usersIndex()
   {
