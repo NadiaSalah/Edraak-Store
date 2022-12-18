@@ -6,8 +6,8 @@
             <h2 class="  border-start border-3 border-primary ps-4"> CART PRODUCTS</h2>
             <div class=" row mt-5">
                 @forelse ($carts as $c_item)
-                    @php $p_item = $c_item->productSize->product; @endphp
-                    @include('includes.front.productItem', ['size' => $c_item->productSize->size])
+                    @php $p_item = $c_item->productSizeItem->product; @endphp
+                    @include('includes.front.productItem', ['size' => $c_item->productSizeItem->size])
                     <!-- Delete cart Modal -->
                     <div class="modal fade" id="delete_cartX{{ $c_item->id }}" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">

@@ -33,15 +33,14 @@ use Illuminate\Support\Facades\Auth;
 Route::controller(RedirectController::class)->group(function () {
   Route::get('/', 'redirect')->name('home');
   Route::get('/front', 'website')->name('website');
-  Route::get('admin/welcome', 'adminWelcome')->name('admin.welcome');
 });
 
 Route::prefix('home')->group(function () {
   Route::controller(FrontController::class)->group(function () {
     Route::get('products/{id}', 'productShow')->name('productsFront.show');
-    Route::get('products.search', 'productsSearch')->name('ProductsFront.search');
-    Route::get('products.filter', 'productsFilter')->name('ProductsFront.filter');
-    Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('ProductsFront.index');
+    Route::get('products.search', 'productsSearch')->name('productsFront.search');
+    Route::get('products.filter', 'productsFilter')->name('productsFront.filter');
+    Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('productsFront.index');
     Route::get('policy', 'viewPolicy')->name('policy');
   });
 });
@@ -73,10 +72,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('categories/destroy/{s_id}/{m_id}', 'categoryDestroy')->name('categories.destroy');
     Route::get('categories/products/create/{m_id}/{s_id}', 'categoryProductCreate')->name('categoryProducts.create');
     Route::get('categories/products/{m_id}/{s_id}', 'categoryProductsIndex')->name('categoryProducts.index');
+    Route::get('dashboard/welcome', 'adminWelcome')->name('admin.welcome');
     Route::get('dashboard/reports', 'dashboardReports')->name('dashboard.reports');
     Route::get('dashboard/setting', 'dashboardSetting')->name('dashboard.setting');
     Route::get('products.search', 'productsSearch')->name('products.search');
+    Route::get('products.popular', 'productsPopular')->name('products.popular');
     Route::get('orders.search', 'ordersSearch')->name('orders.search');
+    Route::get('products.filter', 'productsFilter')->name('products.filter');
     Route::get('products/archive', 'productsArchive')->name('products.archive');
     Route::get('users.index', 'usersIndex')->name('users.index');
     Route::get('users.blocked', 'usersBlocked')->name('users.blocked');

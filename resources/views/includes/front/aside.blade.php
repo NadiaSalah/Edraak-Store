@@ -9,7 +9,7 @@
             <ul class="list-group mt-3">
                 <li class="list-group-item active" aria-current="true">{{ $m_item->name }}</li>
                 @forelse ($m_item->subCategories as $s_item)
-                    <li class="list-group-item"><a href="{{ route('ProductsFront.index',['m_id'=>$m_item->id,'s_id'=>$s_item->id]) }}" style="text-decoration: none;">{{ $s_item->name }}</a>
+                    <li class="list-group-item"><a href="{{ route('productsFront.index',['m_id'=>$m_item->id,'s_id'=>$s_item->id]) }}" style="text-decoration: none;">{{ $s_item->name }}</a>
                     </li>
                 @empty
                 <li>sorry, there are not Subcategories</li>

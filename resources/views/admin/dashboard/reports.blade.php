@@ -30,6 +30,9 @@
         </div>
         <div class="border rounded bg-light p-4 my-3">
             <h3 class="text-start py-2 text-muted">Products</h3>
+            <div class="text-start">
+                <a href="{{ route('products.popular') }}" class="btn btn-outline-primary btn-lg mb-3">Popular Products</a>
+            </div>
             <div class="row  row-cols-auto">
                 <div class="col text-bg-primary card m-2">
                     <div class="d-flex p-3 align-items-center">
@@ -59,7 +62,7 @@
                         <h4 class="pe-3"><i class="fa-solid fa-bag-shopping"></i></h4>
                         <div class="fs-4">
                             <h3>{{ getOrderDetails()->count() }}</h3>
-                            <a href="{{ route('productAlerts.index') }}" class="stretched-link">Orders</a>
+                            <a href="{{ route('orders.index') }}" class="stretched-link">Orders</a>
                         </div>
                     </div>
                 </div>
@@ -76,6 +79,16 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="col text-bg-primary card m-2">
+                    <div class="d-flex p-3 align-items-center">
+                        <h4 class="pe-3"><i class="fa-solid fa-bag-shopping"></i></h4>
+                        <div class="fs-4">
+                            <h3>{{ getmonthOrderDetails()->count() }}</h3>
+                            <a href="{{ route('orders.show', 'month') }}" class="stretched-link">
+                                Current Month</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="border rounded bg-light p-4 my-3">

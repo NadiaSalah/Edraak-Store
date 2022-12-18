@@ -41,6 +41,9 @@ Put an X between the brackets for each feature that has been developed and teste
 ### Admin:
 - [x] An Admin account should be created by the developer.
 - [x] The admin should be able to log into the website.
+- [x] The admin cab be able to list the orders in month.
+- [x] The admin cab be able to list the most popular products.
+- [x] The admin cab be able to list/delete the products alerts written by customers.
 - [x] The logged-in admin should be able to create, list, update, and delete different product categories and subcategories.
 - [x] The logged-in admin should be able to create, list, update, and delete different products.
 - [x] The logged-in admin should be able to see a list of customer orders.
@@ -56,6 +59,8 @@ Put an X between the brackets for each feature that has been developed and teste
 - [x] The customer should be able to view a specific product’s details.
 - [x] The customer should be able to register an account on the website.
 - [x] The customer should be able to log into their account on the website.
+- [x] The customer can be able to see his recommended Products.
+- [x] The customer can be able to creat Alert for a product.
 - [x] The logged-in customer should be able to add a product to their shopping cart.
 - [x] The logged-in customer should be able to view the products added to their cart.
 - [x] The logged-in customer should be able to remove a product that was added to their shopping cart.

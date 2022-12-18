@@ -30,14 +30,17 @@
         Order Item id#{{ $od_item->id }}
     </li>
     <li class="list-group-item list-group-item-info">
-        Item : {{ $od_item->productSize->product->name }}
+        Item : 
+        <a href="{{route('productsFront.show', $od_item->product->id)}}" class="link-dark">
+            {{ $od_item->product->name }} 
+        </a>
     </li>
     <li class="list-group-item list-group-item-secondary">
         Size :
-        @if ($od_item->productSize->size->name == 'no')
+        @if ($od_item->size == 'no')
             No Size
         @else
-            {{ $od_item->productSize->size->name }}
+            {{ $od_item->size }}
         @endif
     </li>
     <li class="list-group-item d-flex justify-content-between align-items-center">

@@ -19,7 +19,7 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('product_size_id')
+            $table->foreignId('product_size_item_id')
                 ->constrained('product_size_items')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

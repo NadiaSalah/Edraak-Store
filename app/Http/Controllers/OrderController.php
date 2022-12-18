@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
-use App\Models\Product;
 use App\Models\User;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -55,6 +53,9 @@ class OrderController extends Controller
             $orderDetails = User::findOrFail($status)->orderDetails()
                 ->orderBy('id', 'DESC')->paginate(6);
             $title ='For user id#' . $status;
+        }elseif($status == 'month'){
+            $title = 'month';
+            $orderDetails = getmonthOrderDetails()->orderBy('id', 'DESC')->paginate(6);
         } else {
             $title = $status;
             $orderDetails = OrderDetail::where('status', $status)
@@ -91,7 +92,7 @@ class OrderController extends Controller
             'status' => $status
         ]);
         if ($status == 'canceled') {
-            $product = $orderDetails->productSize->product;
+            $product = $orderDetails->product;
             $product->quantity +=  $orderDetails->quantity;
             $product->update();
         }

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainCategory;
-use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Session;
 use App\Traits\CallFunTrait;
-use Route;
+
 
 class MainCategoryController extends Controller
 {

@@ -42,7 +42,7 @@
                                 @forelse($m_item->subCategories as $s_item)
                                     <li class="list-inline-item rounded-pill fs-6 px-2 py-1 m-1"
                                         style="background-color:#E14C2B;">
-                                        <a href="{{ route('ProductsFront.index', ['m_id' => $m_item->id, 's_id' => $s_item->id]) }}"
+                                        <a href="{{ route('productsFront.index', ['m_id' => $m_item->id, 's_id' => $s_item->id]) }}"
                                             style="text-decoration: none;color:#011153;">
                                             {{ $m_item->name }}/{{ $s_item->name }}</a>
                                     </li>

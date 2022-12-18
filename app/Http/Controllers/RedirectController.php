@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+
 
 class RedirectController extends Controller
 {
@@ -20,11 +20,8 @@ class RedirectController extends Controller
         }
     }
 
-    public function website(){
+    public function website()
+    {
         return view('front.home.index');
-    }
-
-    public function adminWelcome(){
-        return view('admin.dashboard.welcome');
     }
 }

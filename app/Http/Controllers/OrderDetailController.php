@@ -61,7 +61,7 @@ class OrderDetailController extends Controller
         $total_quantity = 0;
         $final_price = 0;
         foreach (Auth::user()->carts as $c_item) {
-            $product = Product::findOrFail($c_item->productSize->product->id);
+            $product = Product::findOrFail($c_item->productSizeItem->product->id);
             $price = $product->price * (1 - $product->discount / 100);
             $quantity = $c_item->quantity;
             $total_quantity += $quantity;
@@ -69,7 +69,8 @@ class OrderDetailController extends Controller
             $final_price += $total_price;
             OrderDetail::create([
                 'order_id' => $order->id,
-                'product_size_id' => $c_item->product_size_id,
+                'product_id' => $product->id,
+                'size' => $c_item->productSizeItem->size->name,
                 'quantity' => $quantity,
                 'price' => $price,
                 'total_price' =>  $total_price,

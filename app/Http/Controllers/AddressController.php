@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
-use App\Http\Requests\AddressRequest;
 use App\Models\User;
 use Auth;
 use Session;
+use App\Http\Requests\AddressRequest;
 
 
 class AddressController extends Controller

@@ -10,7 +10,6 @@ use App\Models\ProductSizeItem;
 use App\Models\Size;
 use App\Models\SubCategory;
 use App\Traits\CallFunTrait;
-use Illuminate\Http\Request;
 use Session;
 
 class ProductController extends Controller

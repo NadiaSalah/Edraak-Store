@@ -9,7 +9,7 @@
         @forelse ($sale_products=getsaleProducts() as $p_item)
             @include('includes.front.productItem')
         @empty
-            <p>sorry, there are not Products</p>
+            <p>Sorry, there are not Products</p>
         @endforelse
         <!--Pagination-->
         <div class="mt-5 d-flex justify-content-center">

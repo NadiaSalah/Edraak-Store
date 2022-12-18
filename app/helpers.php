@@ -9,6 +9,7 @@ use App\Models\ProductAlert;
 use App\Models\Size;
 use App\Models\SubCategory;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 
 if (!function_exists('getMainCategories')) {
   function getMainCategories()
@@ -59,6 +60,42 @@ if (!function_exists('getSaleProducts')) {
   }
 }
 
+if (!function_exists('getPremiumProducts')) {
+  function getPremiumProducts()
+  {
+    return Product::where('discount', '!=', 0)
+      ->where('return', true)
+      ->where('quantity', '!=', 0)
+      ->orderBy('id', 'desc')
+      ->paginate(3, ['*'], 'premium');
+  }
+}
+
+if (!function_exists('getRecommendedProducts')) {
+  function getRecommendedProducts()
+  {
+    $user_ordersDetails = Auth::user()->orderdetails;
+    if($user_ordersDetails->count() >0){
+    $products_count = array();
+    foreach ($user_ordersDetails as $uod_item) {
+      $products_count[$uod_item->id] =   $uod_item->product->id;
+    }
+    $product_id = max(array_count_values($products_count));
+    $product = Product::findOrFail($product_id);
+    $products = Product::where('quantity', '!==', 0)
+      ->where('main_sub_category_id', $product->main_sub_category_id)
+      ->orwhere('discount', '>', $product->discount)
+      ->where('return', true)
+      ->orderBy('id','DESC')
+      ->paginate(3, ['*'], 'recommended');
+  } else{
+    $products=Product::where('id','-1')
+    ->paginate(3, ['*'], 'recommended');
+  }
+    return  $products;
+  }
+}
+
 if (!function_exists('getSizes')) {
   function getSizes()
   {
@@ -97,6 +134,13 @@ if (!function_exists('getSizes')) {
     function getOrderDetails()
     {
       return OrderDetail::all();
+    }
+  }
+
+  if (!function_exists('getmonthOrderDetails')) {
+    function getmonthOrderDetails()
+    {
+      return OrderDetail::where("created_at", ">", Carbon::now()->subMonths(1));
     }
   }
 
@@ -152,9 +196,9 @@ if (!function_exists('getSizes')) {
       } else {
         $orderdetails = OrderDetail::all();
       }
-      $status=array();
-      foreach(allOrderStatus() as $s_item){
-        $status[$s_item]=$orderdetails->where('status',$s_item)->count();
+      $status = array();
+      foreach (allOrderStatus() as $s_item) {
+        $status[$s_item] = $orderdetails->where('status', $s_item)->count();
       }
       return $status;
     }

@@ -25,7 +25,7 @@
                         <i class="fa-solid fa-envelope-circle-check"></i>
                     </span><span class="text-success">{{ $user->email }}</span>
                 </p>
-                <div class="text-end"><a href="{{ route('dashboard.reports') }}" class="btn btn-primary">Reports</a></div>
+                <div class=""><a href="{{ route('dashboard.reports') }}" class="btn btn-outline-primary btn-lg">Reports</a></div>
             </div>
         </div>
     </div>

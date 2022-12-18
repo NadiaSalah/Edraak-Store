@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MainCategory;
 use App\Models\MainSubCategory;
-use App\Models\Product;
 use App\Models\SubCategory;
-use Arr;
 use Illuminate\Http\Request;
-use Route;
 use Session;
 
 class SubCategoryController extends Controller

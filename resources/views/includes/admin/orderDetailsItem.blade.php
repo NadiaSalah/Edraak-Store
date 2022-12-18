@@ -11,13 +11,18 @@
     </div>
     <div class="card-body mb-3">
         <h6 class="card-title">
-            <span class="text-primary">Item : </span> {{ $od_item->productSize->product->name }}
+            <span class="text-primary">Item : </span> 
+            <a href="{{route('productsFront.show', $od_item->product->id)}}" class="link-dark">
+                {{ $od_item->product->name }} 
+                <button type="button" class="btn btn-warning m-1 btn-sm">
+                    <i class="fa-solid fa-eye"></i></button>
+            </a>
             <span class="d-inline-block m-1 p-1 bg-primary bg-opacity-25 rounded">
                 Size :
-                @if ($od_item->productSize->size->name == 'no')
+                @if ($od_item->size == 'no')
                     No Size
                 @else
-                    {{ $od_item->productSize->size->name }}
+                    {{ $od_item->size }}
                 @endif
             </span>
         </h6>

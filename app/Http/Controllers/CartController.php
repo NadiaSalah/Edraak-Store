@@ -34,7 +34,7 @@ class CartController extends Controller
         $total_quantity = 0;
         $final_price = 0;
         foreach ($carts = $user->carts as $c_item) {
-            $product = $c_item->productSize->product;
+            $product = $c_item->productSizeItem->product;
             if ($product->quantity == 0) {
                 return redirect()->back()
                     ->with('error', 'Please delete the product with cart id#"' . $c_item . '" from your cart dut to it is Out of stock ');
@@ -78,20 +78,20 @@ class CartController extends Controller
         if ($product_size = ProductSizeItem::where('product_id', $product->id)
             ->where('size_id', $size_id)->first()
         ) {
-            $product_size_id = $product_size->id;
+            $product_size_item_id = $product_size->id;
         } else {
             Session::flash('error', 'there is some thing wrong');
             return redirect()->back();
         }
         $user_id = Auth::User()->id;
         if ($cart = Cart::where('user_id', $user_id)
-            ->where('product_size_id', $product_size_id)->first()
+            ->where('product_size_item_id', $product_size_item_id)->first()
         ) {
             return self::class::update($request, $cart->id);
         }
         $cart = Cart::create([
             'user_id' => $user_id,
-            'product_size_id' => $product_size_id,
+            'product_size_item_id' => $product_size_item_id,
             'quantity' => $quantity,
         ]);
         Session::flash('msg', 'Adding the product "' . $product->name . '" to your cart Successflly.');
@@ -168,7 +168,7 @@ class CartController extends Controller
     {
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        Session::flash('msg', 'Deleting the product "' . $cart->productSize->product->name . '"from your cart Successflly.');
+        Session::flash('msg', 'Deleting the product "' . $cart->productSizeItem->product->name . '"from your cart Successflly.');
         return redirect()->back();
     }
 }

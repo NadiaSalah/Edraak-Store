@@ -20,10 +20,11 @@ return new class extends Migration
                 ->constrained('orders')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('product_size_id')
-                ->constrained('product_size_items')
+            $table->foreignId('product_id')
+                ->constrained('products')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->string('size');
             $table->integer('quantity');
             $table->decimal('price', 8, 2);
             $table->decimal('total_price', 8, 2);

@@ -44,9 +44,6 @@ class Product extends Model
 
     public function orderDetails()
     {
-        return $this->hasManyThrough(
-            OrderDetail::class,
-            ProductSizeItem::class,
-        );
+        return $this->hasMany(OrderDetail::class);
     }
 }

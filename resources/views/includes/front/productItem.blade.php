@@ -2,37 +2,53 @@
     <div class="card p-0">
         <div class="card-img-top position-relative"
             style="height: 250px; background: url({{ asset($p_item->image) }}) no-repeat scroll center ; background-size: cover;">
-            @if ($p_item->discount != 0)
-                <span class="badge position-absolute top-0 end-0 bg-danger fs-6  py-2">
-                    <i class="fa-solid fa-arrow-down"></i> {{ $p_item->discount }} <i class="fa-solid fa-percent"></i>
-                    <span class="visually-hidden">unread messages</span>
+            <div class="position-absolute top-0 end-0">
+                @if ($p_item->view == 'hot')
+                    <span class="badge text-danger bg-light bg-opacity-75 fs-6  py-2">
+                        <i class="fa-brands fa-hotjar"></i>
+                    </span>
+                @endif
+                @if ($p_item->return == true)
+                    <span class="badge text-success bg-light bg-opacity-75 fs-6  py-2">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </span>
+                @endif
+                @if ($p_item->discount != 0)
+                    <span class="badge  bg-danger fs-6  py-2">
+                        <i class="fa-solid fa-arrow-down"></i> {{ $p_item->discount }}
+                        <i class="fa-solid fa-percent"></i>
+                    </span>
+                @endif
+            </div>
+            <div class="position-absolute bottom-0 start-0">
+                <span class="badge  text-primary bg-light bg-opacity-75 fs-6  py-2">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    @if ($p_item->discount == 0)
+                        {{ $p_item->price }}
+                    @else
+                        <span class="text-decoration-line-through text-danger">{{ $p_item->price }}</span>
+                        <span>{{ $p_item->price * (1 - $p_item->discount / 100) }}</span>
+                    @endif
                 </span>
-            @endif
+                @if ($p_item->quantity == 0)
+                    <span class="badge  text-danger bg-light bg-opacity-75 fs-6  py-2">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </span>
+                @else
+                    <span class="badge  text-success bg-light bg-opacity-75 fs-6  py-2">
+                        <i class="fa-solid fa-cubes"></i> {{ $p_item->quantity }}
+                    </span>
+                @endif
+            </div>
         </div>
         <div class="card-body" style="transform: rotate(0);">
             <h5 class="card-title text-primary">{{ substr($p_item->name, 0, 30) . '....' }}</h5>
             <p class="text-end m-0 p-0">
-                @if ($p_item->discount == 0)
-                    <span class="bg-info p-2 text-dark bg-opacity-25 rounded me-2 d-inline-block my-2">
-                        <i class="fa-solid fa-dollar-sign"></i>{{ $p_item->price }}
-                    </span>
-                @else
-                    <span class="bg-primary p-2 text-dark bg-opacity-25 rounded border border-info me-2 d-inline-block my-2">
-                        <i class="fa-solid fa-dollar-sign"></i>
-                        <span class="text-decoration-line-through text-danger">{{ $p_item->price }}</span>
-                        <span>{{ $p_item->price * (1 - $p_item->discount / 100) }}</span>
-                        <span class="text-success"></span>
-                    </span>
-                @endif
-                    @if ($p_item->quantity == 0)
-                        <span class="bg-danger p-2 text-danger bg-opacity-25 rounded d-inline-block my-2">
-                            <i class="fa-solid fa-circle-xmark"></i> Out of stock
-                        </span>
-                    @else
-                        <span class="bg-success p-2 text-success bg-opacity-25 rounded d-inline-block my-2">
-                            <i class="fa-solid fa-cubes"></i> In stock: #{{ $p_item->quantity }}
-                        </span>
-                    @endif
+                <span class="d-inline-block  text-bg-info bg-opacity-25 fs-6 p-2 rounded ">
+                    <i class="fa-solid fa-tags"></i>
+                    {{  $p_item->mainSubCategory->mainCategory->name }}
+                    / {{  $p_item->mainSubCategory->subCategory->name }}
+                </span>
                 <!-- Button show product -->
                 <a href="{{ route('productsFront.show', $p_item->id) }}" class="btn btn-warning stretched-link">
                     <i class="fa-sharp fa-solid fa-eye"></i></a>

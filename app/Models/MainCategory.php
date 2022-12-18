@@ -15,7 +15,6 @@ class MainCategory extends Model
     protected $fillable = [
         'name',
         'image'
-
     ];
 
     public function subCategories()
@@ -24,7 +23,7 @@ class MainCategory extends Model
     }
     public function mainSubCategories()
     {
-        return $this->hasMany(MainSubCategory::class)->where('deleted_at',null);
+        return $this->hasMany(MainSubCategory::class);
     }
 
     public function products()

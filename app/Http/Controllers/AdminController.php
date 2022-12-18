@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\User;
 use App\Traits\CallFunTrait;
+use DB;
 use Illuminate\Http\Request;
 use Session;
 
@@ -16,7 +17,16 @@ class AdminController extends Controller
 {
 
   use CallFunTrait;
-
+  //-------route-------------
+  public function adminWelcome()
+  {
+    return view('admin.dashboard.welcome');
+  }
+  public function dashboardReports()
+  {
+    return view('admin.dashboard.reports');
+  }
+  //----------categories------------
   public function categoriesSearch(Request $request)
   {
     $search = strip_tags($request->input('search'));
@@ -66,8 +76,7 @@ class AdminController extends Controller
     }
     return redirect()->back();
   }
-
-
+  // ----------products-------------
   public function productsSearch(Request $request)
   {
     $search = strip_tags($request->input('search'));
@@ -101,6 +110,10 @@ class AdminController extends Controller
     }
   }
 
+  public function productsFilter(Request $request)
+  {
+    return $this->filterProducts($request, 'admin.products.index');
+  }
 
   public function categoryProductCreate($m_id, $s_id)
   {
@@ -120,11 +133,22 @@ class AdminController extends Controller
   {
     return $this->categoryProducts($m_id, $s_id, 'admin.products.index');
   }
-
-  public function dashboardReports()
+  public function productsPopular()
   {
-    return view('admin.dashboard.reports');
+    $title = 'popular "10"';
+    $products_pop = OrderDetail::with('product')
+      ->select('product_id', DB::raw('COUNT(product_id) as count'))
+      ->groupBy('product_id')
+      ->orderBy('count', 'desc')
+      ->take(10)->get();
+    $products = array();
+    foreach ($products_pop as $p_item) {
+      $products[] = $p_item->product;
+    }
+    //return $products;
+    return view('admin.products.index', compact('products', 'title'));
   }
+
   // -----orders----------
   public function ordersSearch(Request $request)
   {
