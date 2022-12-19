@@ -18,7 +18,7 @@ class ProductSizeItemSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             DB::table('product_size_items')->insert([
                 'product_id' =>$i+1,
-                'size_id'=>rand(1,6),
+                'size_id'=>"".rand(1,6),
             ]);
         }
     }
