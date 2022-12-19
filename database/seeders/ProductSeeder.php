@@ -25,12 +25,12 @@ remaining essentially unchanged. It was popularised in the 1960s with the releas
 Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
 publishing software like Aldus PageMaker including versions of Lorem Ipsum';
         $path = 'assets/images/products/';
-        $view =array('normal','hot');
-        $return=array(true,false);
+        $view = array('normal', 'hot');
+        $return = array(true, false);
 
         for ($i = 0; $i < 20; $i++) {
             DB::table('products')->insert([
-                'name' =>   ($i+1).$name,
+                'name' => ($i + 1) . $name,
                 'description' => $description,
                 'image' => $path . ($i + 1) . '.jpg',
                 'quantity' => rand(0, 100),
@@ -38,8 +38,8 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'discount' => rand(0, 45),
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
-                'main_sub_category_id' =>MainSubCategory::where( 'id',rand(1, 18))->first()->id,
-                'created_at' =>now(),
+                'main_sub_category_id' => rand(1, 18),
+                'created_at' => now(),
             ]);
         }
     }
