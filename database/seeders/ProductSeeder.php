@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MainSubCategory;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,7 +38,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'discount' => rand(0, 45),
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
-                'main_sub_category_id' =>rand(1, 18),
+                'main_sub_category_id' =>MainSubCategory::find( rand(1, 18)),
                 'created_at' =>now(),
             ]);
         }
