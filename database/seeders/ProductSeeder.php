@@ -30,9 +30,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
         $return = array(true, false);
 
         for ($i = 0; $i < 20; $i++) {
-            $ms_id=DB::table('main_sub_categories')
-            ->where('id',"".rand(1, MainSubCategory::all()->count()))
-            ->first()->id;
+            $ms_id=DB::table('main_sub_categories')->pluck('id')->firstOrFail(rand(1,10));
             DB::table('products')->insert([
                 'name' => ($i + 1) . $name,
                 'description' => $description,
