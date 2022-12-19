@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MainSubCategory;
 use DB;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
