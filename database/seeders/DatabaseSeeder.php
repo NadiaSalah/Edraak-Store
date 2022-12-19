@@ -25,14 +25,15 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            UserSeeder::class, //add admin in database automatically 
+            UserSeeder::class, //add admin in database automatically
+            AddressSeeder::class, //add Addressfor users in database automatically 
+            SizeSeeder::class, //add sizes in database automatically
             MainCategorySeeder::class, //add main categories in database automatically 
             SubCategorySeeder::class, //add subcategories in database automatically 
             MainSubCategorySeeder::class, //add main_sub categories in database automatically 
             ProductSeeder::class, //add Products in database automatically  
-            SizeSeeder::class, //add sizes in database automatically
             ProductSizeItemSeeder::class, //add Product sizes in database automatically 
-            AddressSeeder::class, //add Addressfor users in database automatically 
+             
         ]);
 
         \App\Models\User::factory(10)->create();
