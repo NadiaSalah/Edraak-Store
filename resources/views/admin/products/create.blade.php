@@ -123,11 +123,11 @@
                 </div>
                 <div class="mb-3">
                     <div class="form-check  form-check-inline">
-                        <input name="return" class="form-check-input" type="checkbox" i value="{{ old('return') }}">
+                        <input name="return" class="form-check-input" type="checkbox" i>
                         <label class="form-check-label"> Return & Exchange policy</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input name="view" class="form-check-input" type="checkbox" i value="{{ old('view') }}">
+                        <input name="view" class="form-check-input" type="checkbox" i>
                         <label class="form-check-label">Hot View</label>
                     </div>
                 </div>
