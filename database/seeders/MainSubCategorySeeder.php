@@ -17,7 +17,7 @@ class MainSubCategorySeeder extends Seeder
     {
         foreach (getMainCategories() as $main) {
             foreach (getsubCategories() as $sub) {
-                DB::table('main_sub_categories')->insert([
+                DB::table('main_sub_categories')->create([
                     'main_category_id' => $main->id,
                     'sub_category_id' => $sub->id,
                 ]);

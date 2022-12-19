@@ -25,7 +25,7 @@ class AddressSeeder extends Seeder
             'state' => 'Florida',
             'country' => 'United States',
             'postal_code' => '32118',
-            'user_id' =>  '2'
+            'user_id' =>  2
         ]);
         DB::table('addresses')->insert([
             'name' => 'work',
@@ -36,7 +36,7 @@ class AddressSeeder extends Seeder
             'state' => 'Colorado',
             'country' => 'United States',
             'postal_code' => '81506',
-            'user_id' => '2'
+            'user_id' => 2
         ]);
         DB::table('addresses')->insert([
             'name' => 'my home',
@@ -47,7 +47,7 @@ class AddressSeeder extends Seeder
             'state' => 'Iowa',
             'country' => 'United States',
             'postal_code' => '46241',
-            'user_id' =>  '3'
+            'user_id' =>  3
         ]);
     }
 }
