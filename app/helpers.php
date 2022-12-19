@@ -39,6 +39,12 @@ if (!function_exists('getProducts')) {
     return Product::orderBy('id', 'desc')->paginate(6, ['*'], 'product');
   }
 }
+if (!function_exists('getProductsArchived')) {
+  function getProductsArchived()
+  {
+    return Product::onlyTrashed()->orderBy('id', 'desc')->get();
+  }
+}
 
 if (!function_exists('getHotProducts')) {
   function getHotProducts()
@@ -127,7 +133,8 @@ if (!function_exists('getSizes')) {
   if (!function_exists('getAlerts')) {
     function getAlerts()
     {
-      return ProductAlert::orderBy('id', 'desc')->paginate(3, ['*'], 'alerts');
+      return ProductAlert::orderBy('id', 'desc')
+      ->paginate(3, ['*'], 'alerts');
     }
   }
   if (!function_exists('getOrderDetails')) {

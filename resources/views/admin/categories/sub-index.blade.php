@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Delete mainCategory Modal -->
+                    <!-- Delete subCategory Modal -->
                     <div class="modal fade" id="delete_subCategoryX{{ $sub_item->id }}" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">

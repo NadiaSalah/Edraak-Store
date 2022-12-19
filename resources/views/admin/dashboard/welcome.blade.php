@@ -15,7 +15,7 @@
             </div>
             <div class="card-body col-md-8 ps-5">
                 <h6 class="card-title text-Productsary">
-                    <span class="text-primary">Categories Name : </span>{{ $user->Categories_name }}
+                    <span class="text-primary">First Name : </span>{{ $user->first_name }}
                 </h6>
                 <h6 class="card-title text-Productsary">
                     <span class="text-primary">Last Name : </span>{{ $user->last_name }}

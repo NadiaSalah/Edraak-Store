@@ -43,6 +43,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col text-bg-warning card m-2">
+                    <div class="d-flex p-3 align-items-center">
+                        <h4 class="pe-3"><i class="fa-solid fa-store"></i></h4>
+                        <div class="fs-4">
+                            <h3>{{ getProductsArchived()->count() }}</h3>
+                            <a href="{{ route('products.archive') }}" class="stretched-link">Archive</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col text-bg-danger card m-2">
                     <div class="d-flex p-3 align-items-center">
                         <h4 class="pe-3"><i class="fa-solid fa-triangle-exclamation"></i></h4>

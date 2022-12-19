@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'last_name'=>'Salah',
             'email'=>'nadia@eng.com',
             'password'=> Hash::make('123456789'),
-            
+            'created_at' =>now(),
         ]);
 
         DB::table('users')->insert([
@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
             'last_name'=>'Ali',
             'email'=>'omar@eng.com',
             'password'=> Hash::make('123456789'),
+            'created_at' =>now(),
             
         ]);
 
@@ -48,6 +49,7 @@ class UserSeeder extends Seeder
             'status'=>false,
             'email'=>'ahmed@eng.com',
             'password'=> Hash::make('123456789'),
+            'created_at' =>now(),
             
         ]);
         

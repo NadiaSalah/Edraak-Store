@@ -66,10 +66,19 @@ class AdminController extends Controller
 
   public function categoryDestroy($s_id, $m_id)
   {
-    $del = MainSubCategory::where('main_category_id', $m_id)
+    $main_sub = MainSubCategory::where('main_category_id', $m_id)
       ->where('sub_category_id', $s_id)->first();
-    if ($del !== null) {
-      $del->delete();
+    if ($main_sub !== null) {
+      if ($main_sub->products->count() > 0) {
+        $un_sub = SubCategory::where('name', 'unrecognized')->first();
+        if (!($un_sub)) {
+          $un_sub = SubCategory::create([
+            'name' => 'unrecognized'
+          ]);
+        }
+        $main_sub->sub_category_id = $un_sub->id;
+        $main_sub->save();
+      }
       Session::flash('msg', 'Deleteing The Sub Category successfully');
     } else {
       Session::flash('error', ' The Sub Category not Deleted');
@@ -111,7 +120,7 @@ class AdminController extends Controller
   }
 
   public function productsFilter(Request $request)
-  {
+  { 
     return $this->filterProducts($request, 'admin.products.index');
   }
 

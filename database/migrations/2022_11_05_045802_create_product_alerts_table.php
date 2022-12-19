@@ -25,6 +25,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->string('alert');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

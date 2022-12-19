@@ -21,8 +21,15 @@ class FrontController extends Controller
    //------products--------
    public function productShow($id)
    {
-      $product = Product::findOrFail($id);
-      return view('front.products.show', compact('product'));
+      $product = Product::onlyTrashed()
+         ->where('id', $id)->first();
+      if ($product) {
+         Session::flash('error', 'Sorry this product id#' . $id . ' is trached');
+         return redirect()->back();
+      } else {
+         $product = Product::findOrFail($id);
+         return view('front.products.show', compact('product'));
+      }
    }
 
    public function categoryProductsIndex($m_id, $s_id)
@@ -52,7 +59,7 @@ class FrontController extends Controller
    }
    public function productsFilter(Request $request)
    {
-      return  $this->filterProducts( $request,'front.products.index'); 
+      return  $this->filterProducts($request, 'front.products.index');
    }
    //------ user--------
 

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductSizeItem extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'product_id',
         'size_id'

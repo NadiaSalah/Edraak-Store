@@ -38,6 +38,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
                 'main_sub_category_id' =>rand(1, 18),
+                'created_at' =>now(),
             ]);
         }
     }

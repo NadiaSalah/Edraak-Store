@@ -92,15 +92,15 @@ class MainCategoryController extends Controller
             'name' => ['required', 'string', 'max:255']
         ]);
         $main_categories = MainCategory::findOrFail($id);
-        $name=strip_tags($request->name);
-        foreach(MainCategory::where('name', $name)->get() as $item){
-            if($item->id !=$id){
+        $name = strip_tags($request->name);
+        foreach (MainCategory::where('name', $name)->get() as $item) {
+            if ($item->id != $id) {
                 $request->validate([
                     'name' => ['unique:main_categories']
                 ]);
             }
         }
-        $main_categories->name =$name;
+        $main_categories->name = $name;
         $img = $request->file('image');
         if ($img != null) {
             $main_categories->image = $this->imgPath($img, 'main-categories');
@@ -118,55 +118,21 @@ class MainCategoryController extends Controller
      */
     public function destroy($id)
     {
-        MainCategory::findOrFail($id)->delete();
-        Session::flash('msg', 'Archiving The Main Category successfully');
+        $main_category = MainCategory::findOrFail($id);
+        if ($main_category->products->count() != 0) {
+            if (!($un_main = MainCategory::where('name', 'unrecognized')->first())) {
+                $un_main = MainCategory::create([
+                    'name' => 'unrecognized'
+                ]);
+            }
+            foreach ($main_category->mainSubCategories as $ms_item) {
+                $ms_item->main_category_id = $un_main->id;
+                $ms_item->save();
+            }
+        }
+        $main_category->delete();
+        Session::flash('msg', 'Deletinging The Main Category successfully');
         return redirect()->back();
     }
 
-    /*manual Admin function*/
-
-    public function archive()
-    {
-        $main_categories = MainCategory::onlyTrashed()->paginate(15);
-        return view('admin.categories.archive', compact('main_categories'));
-    }
-
-    public function forceDelete($id)
-    {
-        MainCategory::withTrashed()
-            ->where('id', $id)
-            ->forceDelete();
-        Session::flash('msg', 'Force delete the Main Category successfully');
-        return redirect()->back();
-    }
-    public function restore($id)
-    {
-        MainCategory::withTrashed()
-            ->where('id', $id)
-            ->restore();
-        Session::flash('msg', 'Restore the Main Category successfully');
-        return redirect()->back();
-    }
-
-    public function archiveAll()
-    {
-        MainCategory::where('id', '!=', null)->Delete();
-        Session::flash('msg', 'Archived all Main Categories successfully');
-        return redirect()->back();
-    }
-
-    public function forceDeleteAll()
-    {
-        MainCategory::onlyTrashed()->forceDelete();
-        Session::flash('msg', 'Force delete all archived Main Categories successfully');
-        return redirect()->back();
-    }
-
-    public function restoreAll()
-    {
-        MainCategory::onlyTrashed()->restore();
-        Session::flash('msg', 'Restore all archived Main Categories successfully');
-        return redirect()->back();
-        // return 'hello';
-    }
 }

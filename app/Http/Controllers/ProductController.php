@@ -23,7 +23,7 @@ class ProductController extends Controller
     use CallFunTrait;
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->paginate(15);
+        $products = Product::orderBy('id', 'desc')->paginate(6);
         return view('admin.products.index', compact('products'));
     }
 
@@ -118,8 +118,16 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        return view('admin.products.show', compact('product'));
+        $product = Product::onlyTrashed()
+            ->where('id', $id)->first();
+        if ($product) {
+            Session::flash('error', 'Sorry this product id#' . $id . ' is trached');
+            return redirect()->back();
+        } else {
+            $product = Product::findOrFail($id);
+            return view('admin.products.show', compact('product'));
+        }
+        
     }
 
     /**
@@ -200,10 +208,10 @@ class ProductController extends Controller
         }
 
         $products->update();
-        foreach($products->productSizeItems as $ps_item){
+        foreach ($products->productSizeItems as $ps_item) {
             $ps_item->forceDelete();
         }
-        
+
         if ($sizeID != null && count($sizeID) > 0) {
             foreach ($sizeID as $item) {
                 ProductSizeItem::create([
@@ -228,8 +236,53 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if ($product->orderDetails->count() == 0) {
+            $product->forceDelete();
+            Session::flash('msg', 'Force delete the Product successfully');
+        } else {
+            $product->delete();
+            Session::flash('error', 'Failling to Force delete the Product but the prouduct is moved into archive.');
+        }
+        return redirect()->route('products.index');
+    }
+
+    /*manual Admin function*/
+
+    public function archive()
+    {
+        $products = Product::onlyTrashed()->paginate(6);
+        return view('admin.products.archive', compact('products'));
+    }
+
+    public function forceDelete($id)
+    {
+        $product = Product::withTrashed()
+            ->where('id', $id)->first();
+        if ($product->orderDetails->count() == 0) {
+            $product->forceDelete();
+            Session::flash('msg', 'Force delete the Product successfully');
+        } else {
+            Session::flash('error', 'Failling to Force delete the Product.');
+        }
+        return redirect()->back();
+    }
+    public function restore($id)
+    {
+        Product::withTrashed()
+            ->where('id', $id)
+            ->restore();
+        Session::flash('msg', 'Restore the Product successfully');
+        return redirect()->back();
+    }
+
+    public function restoreAll()
+    {
+        Product::onlyTrashed()->restore();
+        Session::flash('msg', 'Restore all archived  products successfully');
+        return redirect()->back();
+        // return 'hello';
     }
 }

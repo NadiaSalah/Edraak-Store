@@ -1,4 +1,3 @@
-
 <div style="background-color:#011153;">
     <hr class="border border-primary border-3 opacity-75">
     <div class="container py-5">
@@ -40,12 +39,14 @@
                         @forelse (getMainCategories() as $m_item)
                             @if (count($m_item->products) != 0)
                                 @forelse($m_item->subCategories as $s_item)
-                                    <li class="list-inline-item rounded-pill fs-6 px-2 py-1 m-1"
-                                        style="background-color:#E14C2B;">
-                                        <a href="{{ route('productsFront.index', ['m_id' => $m_item->id, 's_id' => $s_item->id]) }}"
-                                            style="text-decoration: none;color:#011153;">
-                                            {{ $m_item->name }}/{{ $s_item->name }}</a>
-                                    </li>
+                                    @if ($m_item->name !== 'unrecognized' && $s_item->name !== 'unrecognized')
+                                        <li class="list-inline-item rounded-pill fs-6 px-2 py-1 m-1"
+                                            style="background-color:#E14C2B;">
+                                            <a href="{{ route('productsFront.index', ['m_id' => $m_item->id, 's_id' => $s_item->id]) }}"
+                                                style="text-decoration: none;color:#011153;">
+                                                {{ $m_item->name }}/{{ $s_item->name }}</a>
+                                        </li>
+                                    @endif
                                 @empty
                                 @endforelse
                             @endif

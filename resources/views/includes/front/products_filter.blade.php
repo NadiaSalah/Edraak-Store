@@ -17,9 +17,11 @@
                         <select class="form-select mt-2" name="category">
                             @forelse (getMainSubCategories() as $ms_item)
                                 @if ($ms_item->products->count() > 0)
-                                    <option value="{{ $ms_item->id }}">
-                                        {{ $ms_item->maincategory->name }}/{{ $ms_item->subcategory->name }}
-                                    </option>
+                                    @if ($ms_item->maincategory->name !== 'unrecognized' && $ms_item->subcategory->name !== 'unrecognized')
+                                        <option value="{{ $ms_item->id }}">
+                                            {{ $ms_item->maincategory->name }}/{{ $ms_item->subcategory->name }}
+                                        </option>
+                                    @endif
                                 @endif
                             @empty
                             @endforelse

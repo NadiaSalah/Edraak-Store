@@ -60,11 +60,13 @@
                             <select name="main_category" class="form-select" size="3" value="{{ old('main_category') }}"
                                 required>
                                 @forelse (getMaincategories() as $m_item)
-                                    <option class="main collapsed" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
-                                        aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}">
-                                        {{ $m_item->name }}
-                                    </option>
+                                    @if ($m_item->name !== 'unrecognized')
+                                        <option class="main collapsed" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
+                                            aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}">
+                                            {{ $m_item->name }}
+                                        </option>
+                                    @endif
                                 @empty
                                 @endforelse
                             </select>
@@ -75,11 +77,13 @@
                                 <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
                                 <div class="overflow-auto border p-2 rounded" style="height: 90px;">
                                     @forelse ($m_item->subCategories as $s_item)
-                                        <div class="form-check form-check">
-                                            <input class="sub form-check-input" type="radio" name="sub_category"
-                                                value="{{ $s_item->id }}" required>
-                                            <label class="form-check-label">{{ $s_item->name }}</label>
-                                        </div>
+                                        @if ($s_item->name !== 'unrecognized')
+                                            <div class="form-check form-check">
+                                                <input class="sub form-check-input" type="radio" name="sub_category"
+                                                    value="{{ $s_item->id }}" required>
+                                                <label class="form-check-label">{{ $s_item->name }}</label>
+                                            </div>
+                                        @endif
                                     @empty
                                     @endforelse
                                 </div>

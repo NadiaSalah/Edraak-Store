@@ -43,11 +43,13 @@
                         <select name="main_category" class="form-select" size="3"
                             value="{{ $products->mainSubCategory->mainCategory->id }}" required>
                             @forelse (getMaincategories() as $m_item)
-                                <option class="main collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
-                                    aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}"
-                                    @selected( $products->mainSubCategory->mainCategory->id == $m_item->id)> {{ $m_item->name }}
-                                </option>
+                                @if ($m_item->name !== 'unrecognized')
+                                    <option class="main collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseX{{ $m_item->id }}" aria-expanded="false"
+                                        aria-controls="flush-collapseX{{ $m_item->id }}" value="{{ $m_item->id }}"
+                                        @selected($products->mainSubCategory->mainCategory->id == $m_item->id)> {{ $m_item->name }}
+                                    </option>
+                                @endif
                             @empty
                             @endforelse
                         </select>
@@ -56,25 +58,30 @@
                         </div>
                     </div>
                     @forelse (getMaincategories() as $m_item)
-                        <div id="flush-collapseX{{ $m_item->id }}"
-                            class=" mb-3 accordion-collapse collapse  @if ( $products->mainSubCategory->mainCategory->id == $m_item->id) show @endif"
-                            data-bs-parent="#accordionFlushExample">
-                            <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
-                            <div class="overflow-auto border p-2 rounded" style="height: 90px;">
-                                @forelse ($m_item->subCategories as $s_item)
-                                    <div class="form-check form-check">
-                                        <input
-                                            class="sub form-check-input @if ($products->mainSubCategory->subCategory->id == $s_item->id) sub_checked @endif"
-                                            type="radio" name="sub_category" value="{{ $s_item->id }}" required>
-                                        <label class="form-check-label">{{ $s_item->name }}</label>
-                                    </div>
-                                @empty
-                                @endforelse
+                        @if ($m_item->name !== 'unrecognized')
+                            <div id="flush-collapseX{{ $m_item->id }}"
+                                class=" mb-3 accordion-collapse collapse  @if ($products->mainSubCategory->mainCategory->id == $m_item->id) show @endif"
+                                data-bs-parent="#accordionFlushExample">
+                                <label class="form-label">Sub Category for: {{ $m_item->name }}</label>
+                                <div class="overflow-auto border p-2 rounded" style="height: 90px;">
+                                    @forelse ($m_item->subCategories as $s_item)
+                                        @if ($s_item->name !== 'unrecognized')
+                                            <div class="form-check form-check">
+                                                <input
+                                                    class="sub form-check-input @if ($products->mainSubCategory->subCategory->id == $s_item->id) sub_checked @endif"
+                                                    type="radio" name="sub_category" value="{{ $s_item->id }}"
+                                                    required>
+                                                <label class="form-check-label">{{ $s_item->name }}</label>
+                                            </div>
+                                        @endif
+                                    @empty
+                                    @endforelse
+                                </div>
+                                <div class="form-text text-primary">old value:
+                                    {{ $products->mainSubCategory->subCategory->name }}
+                                </div>
                             </div>
-                            <div class="form-text text-primary">old value:
-                                {{$products->mainSubCategory->subCategory->name }}
-                            </div>
-                        </div>
+                        @endif
                     @empty
                     @endforelse
                 </div>
@@ -117,8 +124,7 @@
                     <div class="col-12 col-sm">
                         <label class="form-label">Discount % </label>
                         <input name="discount" type="number" min="0" step="1" max="100"
-                            class="form-control" placeholder="Product Discount" value="{{ $products->discount }}"
-                            required>
+                            class="form-control" placeholder="Product Discount" value="{{ $products->discount }}" required>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -159,13 +165,11 @@
                 if (file) {
                     var reader = new FileReader();
                     reader.onload = function() {
-                        $('#previewImg').css('background-image','url("' +  reader.result +'")');  
+                        $('#previewImg').css('background-image', 'url("' + reader.result + '")');
                     }
                     reader.readAsDataURL(file);
                 }
-            });           
+            });
         });
-
-
     </script>
 @endsection

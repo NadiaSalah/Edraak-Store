@@ -19,7 +19,7 @@
           @yield('page')
         </div>
         <div class="mt-3">
-          <a href="#" class="link-primary ">Go to Home ></a>
+          <a href="{{route('website')}}" class="link-primary ">Go to Home ></a>
         </div>
       </div>
     </div>

@@ -9,13 +9,14 @@ use Session;
 use App\Http\Requests\AddressRequest;
 
 
+
 class AddressController extends Controller
 {
 
     public function index()
     {
         $addresses =  Address::where('user_id', Auth::User()->id)->paginate(6);
-        return view('front.users.addresses',compact('addresses'));
+        return view('front.users.addresses', compact('addresses'));
     }
 
 
@@ -81,7 +82,7 @@ class AddressController extends Controller
 
 
     public function destroy($id)
-    { //return 'xx';
+    {
         Address::findOrFail($id)->delete();
         Session::flash('msg', 'Address is deleted Successfully');
         return redirect()->route('addresses.index');

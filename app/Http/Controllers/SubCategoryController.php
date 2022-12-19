@@ -170,55 +170,21 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        SubCategory::findOrFail($id)->delete();
-        Session::flash('msg', 'Archiving the SubCategory successfully');
-        return redirect()->back();
-    }
-
-    /*manual Admin function*/
-
-
-    public function archive()
-    {
-        $sub_categories = SubCategory::onlyTrashed()->paginate(15);
-        return view('admin.categories.sub-archive', compact('sub_categories'));
-    }
-
-    public function forceDelete($id)
-    {
-        MainCategory::withTrashed()
-            ->where('id', $id)
-            ->forceDelete();
-        Session::flash('msg', 'Force delete the SubCategory successfully');
-        return redirect()->back();
-    }
-    public function restore($id)
-    {
-        SubCategory::withTrashed()
-            ->where('id', $id)
-            ->restore();
-        Session::flash('msg', 'Restore the SubCategory successfully');
-        return redirect()->back();
-    }
-
-    public function archiveAll()
-    {
-        SubCategory::where('id', '!=', null)->Delete();
-        Session::flash('msg', 'Archived all Subcategories successfully');
-        return redirect()->back();
-    }
-
-    public function forceDeleteAll()
-    {
-        SubCategory::onlyTrashed()->forceDelete();
-        Session::flash('msg', 'Force delete all archived Subcategories successfully');
-        return redirect()->back();
-    }
-
-    public function restoreAll()
-    {
-        SubCategory::onlyTrashed()->restore();
-        Session::flash('msg', 'Restore all archived Subcategories successfully');
+        $sub_category = SubCategory::findOrFail($id);
+        if ($sub_category->products->count() != 0) {
+            $un_sub = SubCategory::where('name', 'unrecognized')->first();
+            if (!($un_sub)) {
+                $un_sub = SubCategory::create([
+                    'name' => 'unrecognized'
+                ]);
+            }
+            foreach ($sub_category->mainSubCategories as $ms_item) {
+                $ms_item->sub_category_id =$un_sub->id;
+                $ms_item->save();
+            }
+        }
+        $sub_category->delete();
+        Session::flash('msg', 'Deleting the SubCategory successfully');
         return redirect()->back();
     }
 }

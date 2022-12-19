@@ -12,7 +12,7 @@
     <div class="card-body mb-3">
         <h6 class="card-title">
             <span class="text-primary">Item : </span> 
-            <a href="{{route('productsFront.show', $od_item->product->id)}}" class="link-dark">
+            <a href="{{route('products.show', $od_item->product->id)}}" class="link-dark">
                 {{ $od_item->product->name }} 
                 <button type="button" class="btn btn-warning m-1 btn-sm">
                     <i class="fa-solid fa-eye"></i></button>

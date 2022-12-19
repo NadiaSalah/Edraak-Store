@@ -92,6 +92,12 @@ trait CallFunTrait
     }
     $products = $products->paginate(15);
     Session::flash('msg', 'Successfully,Filtering the products with "' . $srting . '".');
-    return view($route, compact('products'));
+    if ($route == 'admin.products.index') {
+      $title = 'Filter';
+      return view($route, compact('products', 'title'));
+    }else{
+      return view($route, compact('products'));
+    }
+    
   }
 }

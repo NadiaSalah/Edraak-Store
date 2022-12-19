@@ -53,19 +53,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     'orders' => OrderController::class,
   ]);
   Route::resource('productAlerts', ProductAlertController::class)->only(['index', 'show', 'destroy']);
-  Route::controller(MainCategoryController::class)->group(function () {
-    Route::get('mainCategories.archive', 'archive')->name('mainCategories.archive');
-    Route::get('mainCategories.restoreAll', 'restoreAll')->name('mainCategories.restoreAll');
-    Route::get('mainCategories/restore/{id}', 'restore')->name('mainCategories.restore');
-    Route::get('mainCategories.forceDeleteAll', 'forceDeleteAll')->name('mainCategories.forceDeleteAll');
-    Route::get('mainCategories/forceDelete/{id}', 'forceDelete')->name('mainCategories.forceDelete');
-  });
-  Route::controller(SubCategoryController::class)->group(function () {
-    Route::get('subCategories.archive', 'archive')->name('subCategories.archive');
-    Route::get('subCategories.restoreAll', 'restoreAll')->name('subCategories.restoreAll');
-    Route::get('subCategories/restore/{id}', 'restore')->name('subCategories.restore');
-    Route::get('subCategories.forceDeleteAll', 'forceDeleteAll')->name('subCategories.forceDeleteAll');
-    Route::get('subCategories/forceDelete/{id}', 'forceDelete')->name('subCategories.forceDelete');
+  
+  Route::controller(ProductController::class)->group(function () {
+    Route::get('products.archive', 'archive')->name('products.archive');
+    Route::get('products.restoreAll', 'restoreAll')->name('products.restoreAll');
+    Route::get('products/restore/{id}', 'restore')->name('products.restore');
+    Route::get('products/forceDelete/{id}', 'forceDelete')->name('products.forceDelete');
   });
   Route::controller(AdminController::class)->group(function () {
     Route::get('categories.search', 'categoriesSearch')->name('categories.search');
@@ -79,7 +72,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('products.popular', 'productsPopular')->name('products.popular');
     Route::get('orders.search', 'ordersSearch')->name('orders.search');
     Route::get('products.filter', 'productsFilter')->name('products.filter');
-    Route::get('products/archive', 'productsArchive')->name('products.archive');
     Route::get('users.index', 'usersIndex')->name('users.index');
     Route::get('users.blocked', 'usersBlocked')->name('users.blocked');
     Route::get('users.actived', 'usersActived')->name('users.actived');

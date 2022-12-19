@@ -68,6 +68,8 @@ Put an X between the brackets for each feature that has been developed and teste
 - [X] The logged-in customer should be able to view a list of their orders and their statuses.
 - [X] The logged-in customer should be able to view the details of their orders.
 - [x] The logged-in customer should be able to log out of the website.
+- [ ] Online Payments.
+- [ ] email verfication.
 
 ## Database Schema
 

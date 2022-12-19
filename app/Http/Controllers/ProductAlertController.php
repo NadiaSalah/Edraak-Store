@@ -96,7 +96,7 @@ class ProductAlertController extends Controller
     public function destroy($id)
     {
         $alert = ProductAlert::findOrfail($id);
-        $alert->delete();
+        $alert->forceDelete();
         Session::flash('msg', 'Deleting the Alert Successfully.');
         return redirect()->back();
     }

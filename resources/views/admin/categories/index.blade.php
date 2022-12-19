@@ -42,21 +42,25 @@
                                 <!--END Button-->
                             </h4>
                             <div class="btn-group col-auto align-self-end" role="group">
+                                @if($main_item->name !== 'unrecognized')
                                 <!-- Button trigger delet mainCategory modal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete_mainCategoryX{{ $main_item->id }}">
                                     <i class="fa-solid fa-trash"></i></button>
                                 <!--END Button-->
+                                @endif
                                 <!-- Button trigger Edit mainCategory modal -->
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#edit_mainCategoryX{{ $main_item->id }}">
                                     <i class="fa-solid fa-pen-to-square"></i></button>
                                 <!--END Button-->
+                                @if($main_item->name !== 'unrecognized')
                                 <!-- Button trigger create subCategory modal -->
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#create_subCategoryX{{ $main_item->id }}">
                                     <i class="fa-solid fa-plus"></i></button>
                                 <!--END Button-->
+                                @endif
                                 <!-- Button collapse-->
                                 <button type="button" class=" btn btn-primary " data-bs-toggle="collapse"
                                     data-bs-target="#collapseX{{ $main_item->id }}" aria-expanded="false">
@@ -202,18 +206,21 @@
                                                     ]) }}">
                                                     {{ $sub_item->name }}</a>
                                                 <div class="btn-group btn-group-sm ms-2" role="group">
+                                                    @if($sub_item->name !== 'unrecognized')
                                                     <!-- Button trigger  delete subCategory modal -->
                                                     <button type="button" class="btn btn-outline-dark"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#delete_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}">
                                                         <i class="fa-solid fa-trash"></i></button>
                                                     <!--END Button-->
+                                                    @endif
                                                     <!-- Button trigger  Edit subCategory modal -->
                                                     <button type="button" class="btn btn-outline-dark"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#edit_subCategoryX{{ $main_item->id }}{{ $sub_item->id }}">
                                                         <i class="fa-solid fa-pen-to-square"></i></button>
                                                     <!--END Button-->
+                                                    @if($sub_item->name !== 'unrecognized')
                                                     <!-- Button create product -->
                                                     <a href="{{ route('categoryProducts.create', [
                                                         'm_id' => $main_item->id,
@@ -222,6 +229,7 @@
                                                         class="btn btn-outline-dark">
                                                         <i class="fa-solid fa-plus"></i></a>
                                                     <!--END Button-->
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

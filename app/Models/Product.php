@@ -10,6 +10,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    public $timestamps = true;
 
     protected $fillable = [
         'name',
@@ -21,6 +22,7 @@ class Product extends Model
         'view',
         'return',
         'main_sub_category_id',
+        'created_at'
     ];
 
     public function MainSubCategory()
