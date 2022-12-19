@@ -30,6 +30,9 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
         $return = array(true, false);
 
         for ($i = 0; $i < 20; $i++) {
+            $ms_id=DB::table('main_sub_categories')
+            ->where('id',rand(0, MainSubCategory::all()->count()))
+            ->first()->id;
             DB::table('products')->insert([
                 'name' => ($i + 1) . $name,
                 'description' => $description,
@@ -39,7 +42,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'discount' => rand(0, 45),
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
-                'main_sub_category_id' => Factory::randomElement(DB::table('main_sub_categories')->pluck('id')),
+                'main_sub_category_id' => $ms_id,
                 'created_at' => now(),
             ]);
         }
