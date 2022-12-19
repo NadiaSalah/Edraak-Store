@@ -39,7 +39,7 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum';
                 'discount' => rand(0, 45),
                 'view' => $view[rand(0, 1)],
                 'return' =>  $return[rand(0, 1)],
-                'main_sub_category_id' => fake()->randomElement(DB::table('main_sub_categories')->pluck('id')),
+                'main_sub_category_id' => Factory::randomElement(DB::table('main_sub_categories')->pluck('id')),
                 'created_at' => now(),
             ]);
         }
