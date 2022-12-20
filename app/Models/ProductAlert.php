@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductAlert extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+  
     protected $fillable = [
         'product_id',
         'user_id',
