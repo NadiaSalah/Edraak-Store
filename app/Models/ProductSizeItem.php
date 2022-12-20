@@ -21,7 +21,7 @@ class ProductSizeItem extends Model
 
     public function size()
     {
-        return $this->belongsTo(size::class);
+        return $this->belongsTo(Size::class);
     }
 
     public function carts()
