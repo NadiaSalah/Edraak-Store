@@ -77,7 +77,7 @@ Put an X between the brackets for each feature that has been developed and teste
 ## Website Wireframes
 [goto](https://github.com/NadiaSalah/Edraak-Store/tree/master/project_design/wireframes)
 ## Website
-[goto](https://edraake-store.herokuapp.com/front/)
+[goto](http://edraakstore.codartco.com/)
 
 ## Demo 
 [https://youtu.be/empaW_8OVro](https://youtu.be/empaW_8OVro) 
