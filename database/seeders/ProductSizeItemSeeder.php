@@ -25,10 +25,19 @@ class ProductSizeItemSeeder extends Seeder
         // }
 
         foreach (Product::all() as $p) {
-            foreach (Size::all() as $s) {
+            if (rand(0, 1)) {
+                foreach (Size::all() as $s) {
+                    if ($s->name != 'no') {
+                        DB::table('product_size_items')->insert([
+                            'product_id' => $p->id,
+                            'size_id' => $s->id,
+                        ]);
+                    }
+                }
+            } else {
                 DB::table('product_size_items')->insert([
-                    'product_id' =>$p->id,
-                    'size_id'=>$s->id,
+                    'product_id' => $p->id,
+                    'size_id' => Size::where('name','no')->first()->id,
                 ]);
             }
         }
