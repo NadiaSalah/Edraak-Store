@@ -1,0 +1,12 @@
+Thank you Nadia for completing the Micro-credentials program, you have shown excellent presentation skills for your work, you shared a good understanding of how you worked with the database for your business, you have completed all the required features for the admin and the customer, worked on extra features, demonstrated great user experience applications, and regarding your code, you have answered with a good understanding of the framework and how everything works!
+
+Missing requirements:
+- Admins and Customers must have different interfaces (pages).
+
+Best practices that you can work on in your next project to stand out:
+- Try to read about how to cancel/abort ajax's request.
+- Practice form validation best practices.
+- Error handling.
+- Read about clean code.
+
+Thank you for your amazing work!
